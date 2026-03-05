@@ -17,7 +17,7 @@ Idioma: [English](README.md)
 - Índice de documentação: [docs/README.md](docs/README.md)
 - Padrões de engenharia: [docs/engineering_standards.md](docs/engineering_standards.md)
 - Print view da estrutura: [docs/print_view.md](docs/print_view.md)
-- Dicionário de dados: [reports/data_dictionary.md](reports/data_dictionary.md)
+- Dicionário de dados: [docs/data_dictionary.md](docs/data_dictionary.md)
 
 ## Sumário
 
@@ -97,8 +97,8 @@ task quality
 
 ## <a id="testes-automatizados"></a>Testes Automatizados
 
-- `tests/test_schema.py`: valida o contrato mínimo de schema da base raw
-- `tests/test_metrics.py`: valida métricas principais de negócio
+- `tests/test_data_schema.py`: valida o contrato mínimo de schema da base raw
+- `tests/test_kpis.py`: valida métricas principais de negócio
 - `tests/test_artifacts.py`: valida geração de artefatos processados
 
 ## <a id="gestao-de-releases"></a>Gestão de Releases
@@ -115,7 +115,7 @@ task quality
 
 ## <a id="dicionario-de-dados"></a>Dicionário de Dados
 
-Consulte [reports/data_dictionary.md](reports/data_dictionary.md).
+Consulte [docs/data_dictionary.md](docs/data_dictionary.md).
 
 ## <a id="fonte-de-dados"></a>Fonte de Dados
 

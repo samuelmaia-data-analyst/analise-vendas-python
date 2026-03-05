@@ -52,8 +52,8 @@ analise-vendas-python/
 |-- tests/
 |   |-- conftest.py
 |   |-- test_artifacts.py
-|   |-- test_metrics.py
-|   `-- test_schema.py
+|   |-- test_kpis.py
+|   `-- test_data_schema.py
 |-- .editorconfig
 |-- .pre-commit-config.yaml
 |-- app.py

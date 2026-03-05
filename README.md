@@ -17,7 +17,7 @@ Language: [Português (Brasil)](README.pt-BR.md)
 - Documentation Index: [docs/README.md](docs/README.md)
 - Engineering Standards: [docs/engineering_standards.md](docs/engineering_standards.md)
 - Structure Print View: [docs/print_view.md](docs/print_view.md)
-- Data Dictionary: [reports/data_dictionary.md](reports/data_dictionary.md)
+- Data Dictionary: [docs/data_dictionary.md](docs/data_dictionary.md)
 
 ## Table of Contents
 
@@ -97,8 +97,8 @@ task quality
 
 ## Automated Tests
 
-- `tests/test_schema.py`: validates raw schema contract
-- `tests/test_metrics.py`: validates primary business metrics
+- `tests/test_data_schema.py`: validates raw schema contract
+- `tests/test_kpis.py`: validates primary business metrics
 - `tests/test_artifacts.py`: validates processed artifact generation
 
 ## Release Management
@@ -115,7 +115,7 @@ task quality
 
 ## Data Dictionary
 
-See [reports/data_dictionary.md](reports/data_dictionary.md).
+See [docs/data_dictionary.md](docs/data_dictionary.md).
 
 ## Dataset Source
 
