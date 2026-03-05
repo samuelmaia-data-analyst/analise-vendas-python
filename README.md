@@ -1,6 +1,6 @@
 ﻿# Sales Analytics Dashboard (International)
 
-[![CI](https://img.shields.io/github/actions/workflow/status/samuelmaia-data-analyst/analise-vendas-python/ci.yml?label=CI)](https://github.com/samuelmaia-data-analyst/analise-vendas-python/actions/workflows/ci.yml)
+[![CI](https://github.com/samuelmaia-data-analyst/analise-vendas-python/actions/workflows/ci.yml/badge.svg)](https://github.com/samuelmaia-data-analyst/analise-vendas-python/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
 
