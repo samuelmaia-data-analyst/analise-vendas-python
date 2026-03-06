@@ -1,6 +1,7 @@
 ﻿import os
 from contextlib import redirect_stdout
 from datetime import datetime
+from io import BytesIO
 from io import StringIO
 
 import numpy as np
@@ -146,6 +147,25 @@ def carregar_dados() -> tuple[pd.DataFrame, bool, str | None]:
             return pd.read_csv(caminho), True, caminho
 
     return criar_dados_exemplo(), False, None
+
+
+@st.cache_data(show_spinner=False)
+def carregar_csv_upload(file_bytes: bytes) -> pd.DataFrame:
+    # Tenta encodings comuns para evitar erro/trava em arquivos heterogeneos.
+    encodings = ["utf-8-sig", "utf-8", "ISO-8859-1", "cp1252"]
+    last_error: Exception | None = None
+
+    for enc in encodings:
+        try:
+            return pd.read_csv(
+                BytesIO(file_bytes),
+                encoding=enc,
+                low_memory=False,
+            )
+        except Exception as exc:  # noqa: PERF203
+            last_error = exc
+
+    raise ValueError(f"Nao foi possivel ler o CSV enviado. Erro: {last_error}")
 
 
 def compute_yoy(
@@ -623,7 +643,21 @@ with st.sidebar:
     )
 
     if uploaded_file is not None:
-        df = pd.read_csv(uploaded_file, encoding="ISO-8859-1")
+        file_bytes = uploaded_file.getvalue()
+        file_size_mb = len(file_bytes) / (1024 * 1024)
+        if file_size_mb > 40:
+            st.error(
+                f"Arquivo muito grande ({file_size_mb:.1f} MB). Limite recomendado: 40 MB."
+            )
+            st.stop()
+
+        with st.spinner("Carregando arquivo..."):
+            df = carregar_csv_upload(file_bytes)
+
+        if df.empty:
+            st.error("O arquivo foi carregado, mas nao possui linhas validas.")
+            st.stop()
+
         dados_reais = True
         origem = uploaded_file.name
     else:
