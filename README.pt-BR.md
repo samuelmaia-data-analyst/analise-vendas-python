@@ -115,6 +115,27 @@ make quality
 streamlit run app.py
 ```
 
+## Deploy no Streamlit Cloud (Configuração Estável)
+
+- Repositório: `samuelmaia-analytics/analise-vendas-python`
+- Branch: `main`
+- Main file path: `app.py`
+- Versão do Python: automática (ou 3.11+)
+
+Observações:
+- `app.py` é o entrypoint oficial e delega para `app/streamlit_app.py`.
+- Se o app foi excluído/recriado, use um novo subdomínio/URL.
+- Após mudanças relevantes, execute `Reboot app` e `Clear cache` no Streamlit Cloud.
+
+## Troubleshooting Streamlit Cloud
+
+- Sintoma: tela preta / traceback antigo continua
+  - Ação: confirme `main` + `app.py`, depois `Reboot app` e `Clear cache`.
+- Sintoma: upload parece travar
+  - Ação: teste CSV <= 40MB e confirme delimitador (`;` ou `,`); autodetecção está ativa.
+- Sintoma: problema de acesso após troca de usuário
+  - Ação: reconecte o GitHub no Streamlit Cloud e reautorize este repositório.
+
 Alternativa (Taskfile):
 
 ```bash
