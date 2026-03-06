@@ -6,6 +6,12 @@
 
 Idioma: [English](README.md)
 
+## Impacto Executivo
+
+- Converte dados brutos de vendas em uma camada analítica pronta para decisão de receita.
+- Reduz atrito de reporte executivo ao consolidar KPIs, tendência YoY e concentração de Pareto em uma única visão operacional.
+- Eleva previsibilidade de gestão com saídas reproduzíveis (testes + CI + contrato de dados documentado).
+
 ## Links Rápidos
 
 - Repositório: [samuelmaia-data-analyst/analise-vendas-python](https://github.com/samuelmaia-data-analyst/analise-vendas-python)
@@ -22,6 +28,7 @@ Idioma: [English](README.md)
 ## Sumário
 
 - [Resumo Executivo](#resumo-executivo)
+- [Arquitetura e Pipeline](#arquitetura-e-pipeline)
 - [Estrutura de Engenharia](#estrutura-de-engenharia)
 - [Mapa do Repositório](#mapa-do-repositorio)
 - [Portões de Qualidade](#portoes-de-qualidade)
@@ -41,6 +48,24 @@ Entrega:
 - Análise de concentração por Pareto
 - Comparação Year-over-Year (YoY) mensal
 - Dashboard interativo em Streamlit
+
+## <a id="arquitetura-e-pipeline"></a>Arquitetura e Pipeline
+
+```mermaid
+flowchart LR
+    A[Dados Brutos de Vendas<br/>CSV / origem Kaggle] --> B[Validação de Contrato<br/>schema e controles de nulos]
+    B --> C[Motor de Modelagem e Métricas<br/>src/artifacts.py + src/metrics.py]
+    C --> D[Data Mart Processado<br/>fato_vendas + dimensões + xlsx]
+    D --> E[Camada de Consumo<br/>dashboard Streamlit + reports]
+    C --> F[Portões de Qualidade<br/>pytest + ruff + mypy]
+    F --> G[Pipeline de CI<br/>GitHub Actions]
+    G --> H[Governança de Release<br/>VERSION + CHANGELOG + GitHub Release]
+```
+
+Visão sistêmica:
+- Confiabilidade de dados: contrato de schema e geração determinística de artefatos.
+- Confiabilidade de decisão: regras de KPIs isoladas em módulos de negócio testados.
+- Confiabilidade operacional: quality gates em CI e releases versionadas.
 
 ## <a id="estrutura-de-engenharia"></a>Estrutura de Engenharia
 
@@ -103,8 +128,9 @@ task quality
 
 ## <a id="gestao-de-releases"></a>Gestão de Releases
 
-- Versão atual: `0.1.0` ([VERSION](VERSION))
+- Versão atual: `0.2.0` ([VERSION](VERSION))
 - Histórico de mudanças: [CHANGELOG.md](CHANGELOG.md)
+- Releases oficiais: [GitHub Releases](https://github.com/samuelmaia-data-analyst/analise-vendas-python/releases)
 
 ## <a id="governanca"></a>Governança
 

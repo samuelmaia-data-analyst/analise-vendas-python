@@ -6,6 +6,12 @@
 
 Language: [Português (Brasil)](README.pt-BR.md)
 
+## Executive Impact Snapshot
+
+- Converts raw sales records into a decision-ready analytics layer for revenue monitoring.
+- Reduces executive reporting friction by centralizing KPIs, YoY trends, and Pareto concentration in one operational view.
+- Improves leadership cadence with reproducible outputs (tests + CI + documented data contract).
+
 ## Quick Links
 
 - Repository: [samuelmaia-data-analyst/analise-vendas-python](https://github.com/samuelmaia-data-analyst/analise-vendas-python)
@@ -22,6 +28,7 @@ Language: [Português (Brasil)](README.pt-BR.md)
 ## Table of Contents
 
 - [Executive Summary](#executive-summary)
+- [Architecture and Pipeline](#architecture-and-pipeline)
 - [Engineering Structure](#engineering-structure)
 - [Repository Map](#repository-map)
 - [Quality Gates](#quality-gates)
@@ -41,6 +48,24 @@ It combines:
 - Pareto concentration analysis
 - Monthly Year-over-Year (YoY) tracking
 - Interactive Streamlit dashboard
+
+## Architecture and Pipeline
+
+```mermaid
+flowchart LR
+    A[Raw Sales Data<br/>CSV / Kaggle source] --> B[Data Contract Validation<br/>schema and null controls]
+    B --> C[Modeling and Metric Engine<br/>src/artifacts.py + src/metrics.py]
+    C --> D[Processed Data Mart<br/>fato_vendas + dimensions + xlsx]
+    D --> E[Consumption Layer<br/>Streamlit dashboard + reports]
+    C --> F[Quality Gates<br/>pytest + ruff + mypy]
+    F --> G[CI Pipeline<br/>GitHub Actions]
+    G --> H[Release Governance<br/>VERSION + CHANGELOG + GitHub Release]
+```
+
+Systemic perspective:
+- Data reliability: schema contract and deterministic artifact generation.
+- Decision reliability: KPI logic isolated in tested business modules.
+- Operational reliability: CI-enforced quality gates and versioned releases.
 
 ## Engineering Structure
 
@@ -103,8 +128,9 @@ task quality
 
 ## Release Management
 
-- Current version: `0.1.0` ([VERSION](VERSION))
+- Current version: `0.2.0` ([VERSION](VERSION))
 - Change history: [CHANGELOG.md](CHANGELOG.md)
+- Official releases: [GitHub Releases](https://github.com/samuelmaia-data-analyst/analise-vendas-python/releases)
 
 ## Governance
 

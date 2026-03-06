@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog and this project follows Semantic Versioning.
 
+## [0.2.0] - 2026-03-06
+
+### Added
+- Executive impact positioning at the top of README docs (business outcomes and decision support).
+- End-to-end architecture and pipeline section to communicate systemic vision.
+- Official GitHub release workflow (`.github/workflows/release.yml`) for tagged versions.
+
+### Changed
+- Release management section to reference the official published release and release notes flow.
+
 ## [0.1.0] - 2026-03-05
 
 ### Added
