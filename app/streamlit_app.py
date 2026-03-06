@@ -24,6 +24,300 @@ COLOR_PARETO_LINE = "#b45309"
 COLOR_YOY = "#1d4ed8"
 PLOT_FONT = "Segoe UI, Segoe UI Variable, Helvetica Neue, Arial, sans-serif"
 
+I18N: dict[str, dict[str, str]] = {
+    "en": {
+        "lang_label": "Language / Idioma",
+        "settings": "Settings",
+        "upload_csv": "Upload CSV",
+        "upload_help": "Upload your sales CSV file.",
+        "file_too_large": "File too large ({size:.1f} MB). Recommended limit: 40 MB.",
+        "loading_file": "Loading file...",
+        "empty_file": "The file was loaded but has no valid rows.",
+        "base": "Data Overview",
+        "rows": "Rows",
+        "cols": "Columns",
+        "origin": "Source",
+        "sample": "Simulated sample",
+        "mapping": "Column Mapping",
+        "date_col": "Date column",
+        "value_col": "Value column",
+        "no_numeric": "No numeric column found for value.",
+        "analysis": "Analysis",
+        "periodicity": "Periodicity",
+        "monthly": "Monthly",
+        "quarterly": "Quarterly",
+        "yearly": "Yearly",
+        "pareto_dim": "Pareto dimension",
+        "pareto_topn": "Pareto Top N",
+        "no_categorical": "No categorical column found for Pareto.",
+        "simulated_data": "Simulated data",
+        "real_data": "Real data",
+        "demo_data": "Demo sample",
+        "hero_title": "Revenue Intelligence Studio",
+        "hero_subtitle": "Executive dashboard for growth, concentration risk, and revenue seasonality.",
+        "source": "Source",
+        "type": "Type",
+        "updated": "Updated",
+        "badge_1": "C-Level View",
+        "badge_2": "Pareto + YoY",
+        "badge_3": "Pitch Ready",
+        "warn_invalid_data": "No valid data after date/value conversion.",
+        "spinner_calc": "Calculating indicators...",
+        "warn_no_aggregation": "Aggregation did not produce periods for analysis.",
+        "revenue_total": "Total revenue",
+        "avg_growth": "Average growth",
+        "season_peak": "Seasonal peak",
+        "top3": "Top 3",
+        "proof_scale": "Scale analyzed",
+        "proof_dims": "Mapped dimensions",
+        "proof_top3": "Top 3 concentration",
+        "proof_growth": "Average growth",
+        "periods": "periods",
+        "lead_title": "Narrative ready for recruiters and leads",
+        "lead_text": "Impact-oriented dashboard combining growth, concentration risk, and seasonality for executive decisions.",
+        "lead_revenue": "Consolidated revenue",
+        "lead_headline": "Commercial headline",
+        "dataset_real": "Real dataset",
+        "dataset_demo": "Demo dataset",
+        "snapshot": "Executive Snapshot",
+        "signal_growth": "Growth signal",
+        "signal_concentration": "Concentration risk",
+        "signal_momentum": "Current momentum",
+        "tabs_exec": "Executive Radar",
+        "tabs_growth": "Growth",
+        "tabs_pareto": "Pareto",
+        "tabs_yoy": "YoY",
+        "tabs_data": "Data",
+        "cap_exec": "Quick executive readout: revenue trend and growth rhythm in one view.",
+        "cap_growth": "Period performance with recent momentum context.",
+        "cap_pareto": "Revenue concentration to identify dependency and diversification opportunities.",
+        "cap_yoy": "Year-over-year comparison for growth consistency.",
+        "cap_data": "Analytical layer for auditing and sharing.",
+        "last_period": "Last period",
+        "best_period": "Best period",
+        "worst_period": "Worst period",
+        "total_last_month": "Total (last month)",
+        "yoy_last_month": "YoY % (last month)",
+        "yoy_abs_last_month": "YoY abs (last month)",
+        "yoy_no_history": "Not enough history for YoY table yet.",
+        "pareto_top3_caption": "Top 3 in {dim}: {labels}",
+        "pareto_enable": "Select a categorical dimension to enable Pareto.",
+        "download_csv": "Download growth CSV",
+        "analysis_error": "Analysis error: {error}",
+        "footer": "Developed by",
+        "insight_revenue": "Consolidated revenue in the analyzed period: {value}.",
+        "insight_peak": "Highest seasonality month: {value}.",
+        "insight_growth": "Average {direction} growth: {value:.1f}% per period.",
+        "insight_top3": "Top 3 concentration: {value:.1f}% of total revenue.",
+        "insight_range": "Performance range: best in {best} and worst in {worst}.",
+        "expansion": "expansion",
+        "retraction": "contraction",
+        "na": "N/A",
+        "growth_strong": "Strong traction",
+        "growth_moderate": "Moderate traction",
+        "growth_weak": "Weak traction",
+        "risk_low": "Low risk",
+        "risk_moderate": "Moderate risk",
+        "risk_high": "High risk",
+    },
+    "pt-BR": {
+        "lang_label": "Idioma / Language",
+        "settings": "ConfiguraÃ§Ãµes",
+        "upload_csv": "Upload do CSV",
+        "upload_help": "Envie seu arquivo CSV de vendas.",
+        "file_too_large": "Arquivo muito grande ({size:.1f} MB). Limite recomendado: 40 MB.",
+        "loading_file": "Carregando arquivo...",
+        "empty_file": "O arquivo foi carregado, mas nÃ£o possui linhas vÃ¡lidas.",
+        "base": "Base",
+        "rows": "Registros",
+        "cols": "Colunas",
+        "origin": "Origem",
+        "sample": "Amostra simulada",
+        "mapping": "Mapeamento de colunas",
+        "date_col": "Coluna de data",
+        "value_col": "Coluna de valor",
+        "no_numeric": "Nenhuma coluna numÃ©rica encontrada para valor.",
+        "analysis": "AnÃ¡lise",
+        "periodicity": "Periodicidade",
+        "monthly": "Mensal",
+        "quarterly": "Trimestral",
+        "yearly": "Anual",
+        "pareto_dim": "DimensÃ£o para Pareto",
+        "pareto_topn": "Top N do Pareto",
+        "no_categorical": "Nenhuma coluna categÃ³rica encontrada para Pareto.",
+        "simulated_data": "Dados simulados",
+        "real_data": "Dados reais",
+        "demo_data": "Amostra de demonstraÃ§Ã£o",
+        "hero_title": "Revenue Intelligence Studio",
+        "hero_subtitle": "Painel executivo com foco em crescimento, risco de concentraÃ§Ã£o e sazonalidade de receita.",
+        "source": "Fonte",
+        "type": "Tipo",
+        "updated": "Atualizado",
+        "badge_1": "VisÃ£o C-Level",
+        "badge_2": "Pareto + YoY",
+        "badge_3": "Pronto para pitch",
+        "warn_invalid_data": "NÃ£o hÃ¡ dados vÃ¡lidos apÃ³s conversÃ£o de data e valor.",
+        "spinner_calc": "Calculando indicadores...",
+        "warn_no_aggregation": "A agregaÃ§Ã£o nÃ£o gerou perÃ­odos para anÃ¡lise.",
+        "revenue_total": "Receita total",
+        "avg_growth": "Crescimento mÃ©dio",
+        "season_peak": "Pico sazonal",
+        "top3": "Top 3",
+        "proof_scale": "Escala analisada",
+        "proof_dims": "DimensÃµes mapeadas",
+        "proof_top3": "ConcentraÃ§Ã£o Top 3",
+        "proof_growth": "Crescimento mÃ©dio",
+        "periods": "perÃ­odos",
+        "lead_title": "Narrativa pronta para recrutadores e leads",
+        "lead_text": "Dashboard orientado a impacto: combina crescimento, risco de concentraÃ§Ã£o e sazonalidade para decisÃµes executivas.",
+        "lead_revenue": "Receita consolidada",
+        "lead_headline": "Headline comercial",
+        "dataset_real": "Dataset real",
+        "dataset_demo": "Dataset demonstrativo",
+        "snapshot": "Resumo Executivo",
+        "signal_growth": "Sinal de crescimento",
+        "signal_concentration": "Risco de concentraÃ§Ã£o",
+        "signal_momentum": "Momentum atual",
+        "tabs_exec": "Radar Executivo",
+        "tabs_growth": "Crescimento",
+        "tabs_pareto": "Pareto",
+        "tabs_yoy": "YoY",
+        "tabs_data": "Dados",
+        "cap_exec": "Leitura executiva rÃ¡pida: tendÃªncia de receita e ritmo de crescimento no mesmo quadro.",
+        "cap_growth": "Performance por perÃ­odo com contexto de variaÃ§Ã£o recente.",
+        "cap_pareto": "ConcentraÃ§Ã£o de receita para identificar dependÃªncias e oportunidades de diversificaÃ§Ã£o.",
+        "cap_yoy": "ComparaÃ§Ã£o ano contra ano para validar consistÃªncia da expansÃ£o.",
+        "cap_data": "Camada analÃ­tica para auditoria e compartilhamento.",
+        "last_period": "Ãšltimo perÃ­odo",
+        "best_period": "Melhor perÃ­odo",
+        "worst_period": "Pior perÃ­odo",
+        "total_last_month": "Total (Ãºltimo mÃªs)",
+        "yoy_last_month": "YoY % (Ãºltimo mÃªs)",
+        "yoy_abs_last_month": "YoY abs (Ãºltimo mÃªs)",
+        "yoy_no_history": "Ainda nÃ£o hÃ¡ histÃ³rico suficiente para tabela YoY.",
+        "pareto_top3_caption": "Top 3 em {dim}: {labels}",
+        "pareto_enable": "Selecione uma dimensÃ£o categÃ³rica para habilitar o Pareto.",
+        "download_csv": "Baixar CSV (crescimento)",
+        "analysis_error": "Erro na anÃ¡lise: {error}",
+        "footer": "Desenvolvido por",
+        "insight_revenue": "Receita consolidada no perÃ­odo analisado: {value}.",
+        "insight_peak": "MÃªs de maior sazonalidade: {value}.",
+        "insight_growth": "Crescimento mÃ©dio em {direction}: {value:.1f}% por perÃ­odo.",
+        "insight_top3": "ConcentraÃ§Ã£o Top 3: {value:.1f}% da receita total.",
+        "insight_range": "Faixa de performance: melhor em {best} e pior em {worst}.",
+        "expansion": "expansÃ£o",
+        "retraction": "retraÃ§Ã£o",
+        "na": "N/A",
+        "growth_strong": "TraÃ§Ã£o forte",
+        "growth_moderate": "TraÃ§Ã£o moderada",
+        "growth_weak": "TraÃ§Ã£o fraca",
+        "risk_low": "Risco baixo",
+        "risk_moderate": "Risco moderado",
+        "risk_high": "Risco alto",
+    },
+    "pt-PT": {
+        "lang_label": "Idioma / Language",
+        "settings": "DefiniÃ§Ãµes",
+        "upload_csv": "Carregar CSV",
+        "upload_help": "Carregue o seu ficheiro CSV de vendas.",
+        "file_too_large": "Ficheiro demasiado grande ({size:.1f} MB). Limite recomendado: 40 MB.",
+        "loading_file": "A carregar ficheiro...",
+        "empty_file": "O ficheiro foi carregado, mas nÃ£o contÃ©m linhas vÃ¡lidas.",
+        "base": "Base",
+        "rows": "Registos",
+        "cols": "Colunas",
+        "origin": "Origem",
+        "sample": "Amostra simulada",
+        "mapping": "Mapeamento de colunas",
+        "date_col": "Coluna de data",
+        "value_col": "Coluna de valor",
+        "no_numeric": "NÃ£o foi encontrada nenhuma coluna numÃ©rica para valor.",
+        "analysis": "AnÃ¡lise",
+        "periodicity": "Periodicidade",
+        "monthly": "Mensal",
+        "quarterly": "Trimestral",
+        "yearly": "Anual",
+        "pareto_dim": "DimensÃ£o para Pareto",
+        "pareto_topn": "Top N do Pareto",
+        "no_categorical": "NÃ£o foi encontrada nenhuma coluna categÃ³rica para Pareto.",
+        "simulated_data": "Dados simulados",
+        "real_data": "Dados reais",
+        "demo_data": "Amostra demonstrativa",
+        "hero_title": "Revenue Intelligence Studio",
+        "hero_subtitle": "Painel executivo orientado para crescimento, risco de concentraÃ§Ã£o e sazonalidade da receita.",
+        "source": "Fonte",
+        "type": "Tipo",
+        "updated": "Atualizado",
+        "badge_1": "VisÃ£o C-Level",
+        "badge_2": "Pareto + YoY",
+        "badge_3": "Pronto para pitch",
+        "warn_invalid_data": "NÃ£o existem dados vÃ¡lidos apÃ³s conversÃ£o de data e valor.",
+        "spinner_calc": "A calcular indicadores...",
+        "warn_no_aggregation": "A agregaÃ§Ã£o nÃ£o gerou perÃ­odos para anÃ¡lise.",
+        "revenue_total": "Receita total",
+        "avg_growth": "Crescimento mÃ©dio",
+        "season_peak": "Pico sazonal",
+        "top3": "Top 3",
+        "proof_scale": "Escala analisada",
+        "proof_dims": "DimensÃµes mapeadas",
+        "proof_top3": "ConcentraÃ§Ã£o Top 3",
+        "proof_growth": "Crescimento mÃ©dio",
+        "periods": "perÃ­odos",
+        "lead_title": "Narrativa pronta para recrutadores e leads",
+        "lead_text": "Dashboard orientado para impacto: combina crescimento, risco de concentraÃ§Ã£o e sazonalidade para decisÃµes executivas.",
+        "lead_revenue": "Receita consolidada",
+        "lead_headline": "Headline comercial",
+        "dataset_real": "Dataset real",
+        "dataset_demo": "Dataset demonstrativo",
+        "snapshot": "Resumo Executivo",
+        "signal_growth": "Sinal de crescimento",
+        "signal_concentration": "Risco de concentraÃ§Ã£o",
+        "signal_momentum": "Momentum atual",
+        "tabs_exec": "Radar Executivo",
+        "tabs_growth": "Crescimento",
+        "tabs_pareto": "Pareto",
+        "tabs_yoy": "YoY",
+        "tabs_data": "Dados",
+        "cap_exec": "Leitura executiva rÃ¡pida: tendÃªncia da receita e ritmo de crescimento no mesmo quadro.",
+        "cap_growth": "Performance por perÃ­odo com contexto da variaÃ§Ã£o recente.",
+        "cap_pareto": "ConcentraÃ§Ã£o da receita para identificar dependÃªncias e oportunidades de diversificaÃ§Ã£o.",
+        "cap_yoy": "ComparaÃ§Ã£o ano contra ano para validar consistÃªncia da expansÃ£o.",
+        "cap_data": "Camada analÃ­tica para auditoria e partilha.",
+        "last_period": "Ãšltimo perÃ­odo",
+        "best_period": "Melhor perÃ­odo",
+        "worst_period": "Pior perÃ­odo",
+        "total_last_month": "Total (Ãºltimo mÃªs)",
+        "yoy_last_month": "YoY % (Ãºltimo mÃªs)",
+        "yoy_abs_last_month": "YoY abs (Ãºltimo mÃªs)",
+        "yoy_no_history": "Ainda nÃ£o existe histÃ³rico suficiente para a tabela YoY.",
+        "pareto_top3_caption": "Top 3 em {dim}: {labels}",
+        "pareto_enable": "Selecione uma dimensÃ£o categÃ³rica para ativar o Pareto.",
+        "download_csv": "Descarregar CSV (crescimento)",
+        "analysis_error": "Erro na anÃ¡lise: {error}",
+        "footer": "Desenvolvido por",
+        "insight_revenue": "Receita consolidada no perÃ­odo analisado: {value}.",
+        "insight_peak": "MÃªs com maior sazonalidade: {value}.",
+        "insight_growth": "Crescimento mÃ©dio em {direction}: {value:.1f}% por perÃ­odo.",
+        "insight_top3": "ConcentraÃ§Ã£o Top 3: {value:.1f}% da receita total.",
+        "insight_range": "Faixa de performance: melhor em {best} e pior em {worst}.",
+        "expansion": "expansÃ£o",
+        "retraction": "retraÃ§Ã£o",
+        "na": "N/A",
+        "growth_strong": "TraÃ§Ã£o forte",
+        "growth_moderate": "TraÃ§Ã£o moderada",
+        "growth_weak": "TraÃ§Ã£o fraca",
+        "risk_low": "Risco baixo",
+        "risk_moderate": "Risco moderado",
+        "risk_high": "Risco alto",
+    },
+}
+
+
+def tr(key: str, lang: str | None = None, **kwargs: object) -> str:
+    active_lang = lang or st.session_state.get("lang", "en")
+    text = I18N.get(active_lang, I18N["en"]).get(key, I18N["en"].get(key, key))
+    return text.format(**kwargs) if kwargs else text
+
 
 def format_currency(value: float, symbol: str = "$") -> str:
     try:
@@ -261,7 +555,7 @@ def calcular_crescimento_cached(
 
 
 def build_pareto_chart(
-    pareto_df: pd.DataFrame, dim_col: str, top_n: int = 15
+    pareto_df: pd.DataFrame, dim_col: str, top_n: int = 15, lang: str = "en"
 ) -> go.Figure:
     plot_df = pareto_df.head(top_n).copy()
 
@@ -278,7 +572,7 @@ def build_pareto_chart(
         go.Scatter(
             x=plot_df[dim_col].astype(str),
             y=plot_df["cum_share_pct"],
-            name="% Acumulado",
+            name="% acumulado",
             mode="lines+markers",
             yaxis="y2",
             line=dict(color=COLOR_PARETO_LINE, width=2.5),
@@ -290,7 +584,7 @@ def build_pareto_chart(
         height=420,
         xaxis_title=dim_col,
         yaxis=dict(title="Total", showgrid=True),
-        yaxis2=dict(title="% Acumulado", overlaying="y", side="right", range=[0, 100]),
+        yaxis2=dict(title="% acumulado", overlaying="y", side="right", range=[0, 100]),
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
         font=dict(family=PLOT_FONT),
         margin=dict(l=30, r=30, t=30, b=30),
@@ -298,24 +592,24 @@ def build_pareto_chart(
     return fig
 
 
-def classify_growth_signal(value: float) -> tuple[str, str]:
+def classify_growth_signal(value: float, lang: str) -> tuple[str, str]:
     if pd.isna(value):
-        return "N/A", "signal-warn"
+        return tr("na", lang), "signal-warn"
     if value >= 8:
-        return "Tracao Forte", "signal-good"
+        return tr("growth_strong", lang), "signal-good"
     if value >= 2:
-        return "Tracao Moderada", "signal-warn"
-    return "Tracao Fraca", "signal-risk"
+        return tr("growth_moderate", lang), "signal-warn"
+    return tr("growth_weak", lang), "signal-risk"
 
 
-def classify_concentration_signal(value: float | None) -> tuple[str, str]:
+def classify_concentration_signal(value: float | None, lang: str) -> tuple[str, str]:
     if value is None or pd.isna(value):
-        return "N/A", "signal-warn"
+        return tr("na", lang), "signal-warn"
     if value <= 50:
-        return "Risco Baixo", "signal-good"
+        return tr("risk_low", lang), "signal-good"
     if value <= 70:
-        return "Risco Moderado", "signal-warn"
-    return "Risco Alto", "signal-risk"
+        return tr("risk_moderate", lang), "signal-warn"
+    return tr("risk_high", lang), "signal-risk"
 
 
 def inject_css() -> None:
@@ -553,19 +847,19 @@ def inject_css() -> None:
     )
 
 
-def render_header(origem: str | None, dados_reais: bool) -> None:
-    fonte = origem if origem else "Dados simulados"
-    tipo = "Dados reais" if dados_reais else "Amostra de demonstracao"
+def render_header(origem: str | None, dados_reais: bool, lang: str) -> None:
+    fonte = origem if origem else tr("simulated_data", lang)
+    tipo = tr("real_data", lang) if dados_reais else tr("demo_data", lang)
     st.markdown(
         f"""
 <div class='hero-wrap'>
-    <h1 class='hero-title'>Revenue Intelligence Studio</h1>
-    <p class='hero-subtitle'>Painel executivo com narrativa de crescimento, risco comercial e concentracao de receita para tomada de decisao.</p>
-    <p class='hero-subtitle'><strong>Fonte:</strong> {fonte} | <strong>Tipo:</strong> {tipo} | <strong>Atualizado:</strong> {datetime.now().strftime('%d/%m/%Y %H:%M')}</p>
+    <h1 class='hero-title'>{tr('hero_title', lang)}</h1>
+    <p class='hero-subtitle'>{tr('hero_subtitle', lang)}</p>
+    <p class='hero-subtitle'><strong>{tr('source', lang)}:</strong> {fonte} | <strong>{tr('type', lang)}:</strong> {tipo} | <strong>{tr('updated', lang)}:</strong> {datetime.now().strftime('%d/%m/%Y %H:%M')}</p>
     <div class='hero-badges'>
-        <span class='hero-badge'>Visao C-Level</span>
-        <span class='hero-badge'>Pareto + YoY</span>
-        <span class='hero-badge'>Pronto para Pitch</span>
+        <span class='hero-badge'>{tr('badge_1', lang)}</span>
+        <span class='hero-badge'>{tr('badge_2', lang)}</span>
+        <span class='hero-badge'>{tr('badge_3', lang)}</span>
     </div>
 </div>
 """,
@@ -578,16 +872,17 @@ def render_proof_strip(
     dimensoes: int,
     top3_share: float | None,
     crescimento_medio: float,
+    lang: str,
 ) -> None:
-    concentracao = f"{top3_share:.1f}%" if top3_share is not None else "N/A"
-    crescimento = f"{crescimento_medio:.1f}%" if pd.notna(crescimento_medio) else "N/A"
+    concentracao = f"{top3_share:.1f}%" if top3_share is not None else tr("na", lang)
+    crescimento = f"{crescimento_medio:.1f}%" if pd.notna(crescimento_medio) else tr("na", lang)
     st.markdown(
         f"""
 <div class='proof-grid'>
-    <div class='proof-card'><p class='proof-k'>Escala analisada</p><p class='proof-v'>{periodos} periodos</p></div>
-    <div class='proof-card'><p class='proof-k'>Dimensoes mapeadas</p><p class='proof-v'>{dimensoes}</p></div>
-    <div class='proof-card'><p class='proof-k'>Concentracao Top 3</p><p class='proof-v'>{concentracao}</p></div>
-    <div class='proof-card'><p class='proof-k'>Crescimento medio</p><p class='proof-v'>{crescimento}</p></div>
+    <div class='proof-card'><p class='proof-k'>{tr('proof_scale', lang)}</p><p class='proof-v'>{periodos} {tr('periods', lang)}</p></div>
+    <div class='proof-card'><p class='proof-k'>{tr('proof_dims', lang)}</p><p class='proof-v'>{dimensoes}</p></div>
+    <div class='proof-card'><p class='proof-k'>{tr('proof_top3', lang)}</p><p class='proof-v'>{concentracao}</p></div>
+    <div class='proof-card'><p class='proof-k'>{tr('proof_growth', lang)}</p><p class='proof-v'>{crescimento}</p></div>
 </div>
 """,
         unsafe_allow_html=True,
@@ -599,24 +894,25 @@ def render_lead_strip(
     crescimento_medio: float,
     top3_share: float | None,
     dados_reais: bool,
+    lang: str,
 ) -> None:
-    crescimento = f"{crescimento_medio:.1f}%" if pd.notna(crescimento_medio) else "N/A"
-    concentracao = f"{top3_share:.1f}%" if top3_share is not None else "N/A"
-    origem_label = "Dataset real" if dados_reais else "Dataset demonstrativo"
+    crescimento = f"{crescimento_medio:.1f}%" if pd.notna(crescimento_medio) else tr("na", lang)
+    concentracao = f"{top3_share:.1f}%" if top3_share is not None else tr("na", lang)
+    origem_label = tr("dataset_real", lang) if dados_reais else tr("dataset_demo", lang)
     st.markdown(
         f"""
 <div class='lead-strip'>
     <div>
-        <p class='lead-title'>Narrativa pronta para recrutadores e leads</p>
-        <p class='lead-txt'>Dashboard orientado a impacto: combina crescimento, risco de concentracao e sazonalidade para guiar decisao executiva.</p>
+        <p class='lead-title'>{tr('lead_title', lang)}</p>
+        <p class='lead-txt'>{tr('lead_text', lang)}</p>
     </div>
     <div>
-        <p class='lead-k'>Receita consolidada</p>
+        <p class='lead-k'>{tr('lead_revenue', lang)}</p>
         <p class='lead-v'>{format_currency(receita_total, '$')}</p>
         <p class='lead-txt'>{origem_label}</p>
     </div>
     <div>
-        <p class='lead-k'>Headline comercial</p>
+        <p class='lead-k'>{tr('lead_headline', lang)}</p>
         <p class='lead-v'>Growth {crescimento}</p>
         <p class='lead-txt'>Top 3 share {concentracao}</p>
     </div>
@@ -643,20 +939,21 @@ def build_executive_insights(
     top3_share: float | None,
     melhor_periodo: str,
     pior_periodo: str,
+    lang: str,
 ) -> list[str]:
     insights = [
-        f"Receita consolidada no periodo analisado: {format_currency(receita_total, '$')}.",
-        f"Mes de maior sazonalidade de receita: {mes_pico}.",
+        tr("insight_revenue", lang, value=format_currency(receita_total, "$")),
+        tr("insight_peak", lang, value=mes_pico),
     ]
 
     if pd.notna(crescimento_medio):
-        direcao = "expansao" if crescimento_medio >= 0 else "retracao"
-        insights.append(f"Crescimento medio em {direcao}: {crescimento_medio:.1f}% por periodo.")
+        direcao = tr("expansion", lang) if crescimento_medio >= 0 else tr("retraction", lang)
+        insights.append(tr("insight_growth", lang, direction=direcao, value=crescimento_medio))
 
     if top3_share is not None:
-        insights.append(f"Concentracao top 3: {top3_share:.1f}% da receita total.")
+        insights.append(tr("insight_top3", lang, value=top3_share))
 
-    insights.append(f"Faixa de performance: melhor em {melhor_periodo} e pior em {pior_periodo}.")
+    insights.append(tr("insight_range", lang, best=melhor_periodo, worst=pior_periodo))
     return insights
 
 
@@ -669,21 +966,28 @@ st.set_page_config(
 inject_css()
 
 with st.sidebar:
-    st.markdown("## Configuracoes")
+    lang_options = {
+        "English": "en",
+        "PortuguÃªs (Brasil)": "pt-BR",
+        "PortuguÃªs (Portugal)": "pt-PT",
+    }
+    selected_lang_label = st.selectbox("Language / Idioma", list(lang_options.keys()), index=0)
+    lang = lang_options[selected_lang_label]
+    st.session_state["lang"] = lang
+
+    st.markdown(f"## {tr('settings', lang)}")
 
     uploaded_file = st.file_uploader(
-        "Upload do CSV",
+        tr("upload_csv", lang),
         type=["csv"],
-        help="Envie seu arquivo de vendas em CSV.",
+        help=tr("upload_help", lang),
     )
 
     if uploaded_file is not None:
         file_bytes = uploaded_file.getvalue()
         file_size_mb = len(file_bytes) / (1024 * 1024)
         if file_size_mb > 40:
-            st.error(
-                f"Arquivo muito grande ({file_size_mb:.1f} MB). Limite recomendado: 40 MB."
-            )
+            st.error(tr("file_too_large", lang, size=file_size_mb))
             st.stop()
 
         upload_key = f"{uploaded_file.name}:{len(file_bytes)}"
@@ -693,13 +997,13 @@ with st.sidebar:
         if cached_key == upload_key and isinstance(cached_df, pd.DataFrame):
             df = cached_df
         else:
-            with st.spinner("Carregando arquivo..."):
+            with st.spinner(tr("loading_file", lang)):
                 df = carregar_csv_upload(file_bytes)
             st.session_state["upload_key"] = upload_key
             st.session_state["upload_df"] = df
 
         if df.empty:
-            st.error("O arquivo foi carregado, mas nao possui linhas validas.")
+            st.error(tr("empty_file", lang))
             st.stop()
 
         dados_reais = True
@@ -707,42 +1011,47 @@ with st.sidebar:
     else:
         df, dados_reais, origem = carregar_dados()
 
-    st.markdown("### Base")
+    st.markdown(f"### {tr('base', lang)}")
     c1, c2 = st.columns(2)
     with c1:
-        st.metric("Registros", f"{len(df):,}")
+        st.metric(tr("rows", lang), f"{len(df):,}")
     with c2:
-        st.metric("Colunas", len(df.columns))
+        st.metric(tr("cols", lang), len(df.columns))
 
-    st.caption(f"Origem: {origem if origem else 'Amostra simulada'}")
+    st.caption(f"{tr('origin', lang)}: {origem if origem else tr('sample', lang)}")
 
-    st.markdown("### Mapeamento")
+    st.markdown(f"### {tr('mapping', lang)}")
     colunas = df.columns.tolist()
     data_options = detect_date_columns(colunas) or colunas
-    coluna_data = st.selectbox("Coluna de data", data_options, index=0)
+    coluna_data = st.selectbox(tr("date_col", lang), data_options, index=0)
 
     valor_options = detect_value_columns(df)
     if not valor_options:
-        st.error("Nenhuma coluna numerica encontrada para valor.")
+        st.error(tr("no_numeric", lang))
         st.stop()
-    coluna_valor = st.selectbox("Coluna de valor", valor_options, index=0)
+    coluna_valor = st.selectbox(tr("value_col", lang), valor_options, index=0)
 
-    st.markdown("### Analise")
-    periodo = st.selectbox("Periodicidade", ["Mensal", "Trimestral", "Anual"], index=0)
-    periodo_map = {"Mensal": "M", "Trimestral": "T", "Anual": "A"}
+    st.markdown(f"### {tr('analysis', lang)}")
+    period_labels = [tr("monthly", lang), tr("quarterly", lang), tr("yearly", lang)]
+    periodo = st.selectbox(tr("periodicity", lang), period_labels, index=0)
+    periodo_map = {
+        tr("monthly", lang): "M",
+        tr("quarterly", lang): "T",
+        tr("yearly", lang): "A",
+    }
 
     dim_options = suggest_dimension_columns(df)
     if dim_options:
-        dim_concentracao = st.selectbox("Dimensao para Pareto", dim_options, index=0)
-        top_n_pareto = st.slider("Top N do Pareto", min_value=5, max_value=30, value=12, step=1)
+        dim_concentracao = st.selectbox(tr("pareto_dim", lang), dim_options, index=0)
+        top_n_pareto = st.slider(tr("pareto_topn", lang), min_value=5, max_value=30, value=12, step=1)
     else:
         dim_concentracao = None
         top_n_pareto = 12
-        st.info("Nenhuma coluna categorica encontrada para Pareto.")
+        st.info(tr("no_categorical", lang))
 
 
 try:
-    render_header(origem, dados_reais)
+    render_header(origem, dados_reais, lang)
 
     df_analise = df.copy()
     df_analise[coluna_data] = safe_to_datetime(df_analise[coluna_data])
@@ -750,10 +1059,10 @@ try:
     df_analise = df_analise.dropna(subset=[coluna_data, coluna_valor])
 
     if df_analise.empty:
-        st.warning("Nao ha dados validos apos conversao de data e valor.")
+        st.warning(tr("warn_invalid_data", lang))
         st.stop()
 
-    with st.spinner("Calculando indicadores..."):
+    with st.spinner(tr("spinner_calc", lang)):
         resultado = calcular_crescimento_cached(
             df_analise,
             coluna_data=coluna_data,
@@ -762,7 +1071,7 @@ try:
         )
 
     if resultado.empty:
-        st.warning("A agregacao nao gerou periodos para analise.")
+        st.warning(tr("warn_no_aggregation", lang))
         st.stop()
 
     receita_total = float(df_analise[coluna_valor].sum())
@@ -805,43 +1114,46 @@ try:
         top3_share=top3_share,
         melhor_periodo=melhor_periodo_exec,
         pior_periodo=pior_periodo_exec,
+        lang=lang,
     )
 
-    crescimento_label, crescimento_class = classify_growth_signal(crescimento_medio)
-    concentracao_label, concentracao_class = classify_concentration_signal(top3_share)
+    crescimento_label, crescimento_class = classify_growth_signal(crescimento_medio, lang)
+    concentracao_label, concentracao_class = classify_concentration_signal(top3_share, lang)
 
     ult_crescimento = (
         float(resultado["crescimento_%"].iloc[-1])
         if len(resultado) and pd.notna(resultado["crescimento_%"].iloc[-1])
         else np.nan
     )
-    momentum_label, momentum_class = classify_growth_signal(ult_crescimento)
+    momentum_label, momentum_class = classify_growth_signal(ult_crescimento, lang)
 
     k1, k2, k3, k4 = st.columns(4)
     with k1:
-        st.metric("Receita total", format_currency(receita_total, "$"))
+        st.metric(tr("revenue_total", lang), format_currency(receita_total, "$"))
     with k2:
-        st.metric("Crescimento medio", f"{crescimento_medio:.1f}%" if pd.notna(crescimento_medio) else "N/A")
+        st.metric(tr("avg_growth", lang), f"{crescimento_medio:.1f}%" if pd.notna(crescimento_medio) else tr("na", lang))
     with k3:
-        st.metric("Pico sazonal", mes_pico)
+        st.metric(tr("season_peak", lang), mes_pico)
     with k4:
-        st.metric("Top 3", f"{top3_share:.1f}%" if top3_share is not None else "N/A")
+        st.metric(tr("top3", lang), f"{top3_share:.1f}%" if top3_share is not None else tr("na", lang))
 
     render_proof_strip(
         periodos=int(len(resultado)),
         dimensoes=int(len(df_analise.columns)),
         top3_share=top3_share,
         crescimento_medio=crescimento_medio,
+        lang=lang,
     )
     render_lead_strip(
         receita_total=receita_total,
         crescimento_medio=crescimento_medio,
         top3_share=top3_share,
         dados_reais=dados_reais,
+        lang=lang,
     )
 
     st.markdown(
-        "<div class='section-card'><h4 style='margin-top:0'>Executive Snapshot</h4><ul class='snapshot-list'>"
+        f"<div class='section-card'><h4 style='margin-top:0'>{tr('snapshot', lang)}</h4><ul class='snapshot-list'>"
         + "".join([f"<li>{item}</li>" for item in insights])
         + "</ul></div>",
         unsafe_allow_html=True,
@@ -851,15 +1163,15 @@ try:
         f"""
 <div class='signal-grid'>
     <div class='signal-card {crescimento_class}'>
-        <div class='signal-title'>Sinal de Crescimento</div>
+        <div class='signal-title'>{tr('signal_growth', lang)}</div>
         <div class='signal-value'>{crescimento_label}</div>
     </div>
     <div class='signal-card {concentracao_class}'>
-        <div class='signal-title'>Risco de Concentracao</div>
+        <div class='signal-title'>{tr('signal_concentration', lang)}</div>
         <div class='signal-value'>{concentracao_label}</div>
     </div>
     <div class='signal-card {momentum_class}'>
-        <div class='signal-title'>Momentum Atual</div>
+        <div class='signal-title'>{tr('signal_momentum', lang)}</div>
         <div class='signal-value'>{momentum_label}</div>
     </div>
 </div>
@@ -868,13 +1180,11 @@ try:
     )
 
     tab_overview, tab_growth, tab_pareto, tab_yoy, tab_data = st.tabs(
-        ["Radar Executivo", "Crescimento", "Pareto", "YoY", "Dados"]
+        [tr("tabs_exec", lang), tr("tabs_growth", lang), tr("tabs_pareto", lang), tr("tabs_yoy", lang), tr("tabs_data", lang)]
     )
 
     with tab_overview:
-        st.caption(
-            "Leitura rapida para reunioes comerciais: tendencia de receita e ritmo de crescimento no mesmo quadro."
-        )
+        st.caption(tr("cap_exec", lang))
         c_left, c_right = st.columns(2)
 
         with c_left:
@@ -916,7 +1226,7 @@ try:
             st.plotly_chart(fig_cresc, width="stretch")
 
     with tab_growth:
-        st.caption("Performance ao longo dos periodos com destaque para variacao recente.")
+        st.caption(tr("cap_growth", lang))
         c1, c2, c3, c4 = st.columns(4)
 
         delta = (
@@ -931,16 +1241,16 @@ try:
 
         with c1:
             st.metric(
-                "Crescimento medio",
-                f"{crescimento_medio:.1f}%" if pd.notna(crescimento_medio) else "N/A",
+                tr("avg_growth", lang),
+                f"{crescimento_medio:.1f}%" if pd.notna(crescimento_medio) else tr("na", lang),
                 delta=f"{delta:.1f} pp" if pd.notna(delta) else None,
             )
         with c2:
-            st.metric("Ultimo periodo", format_currency(ultimo_valor, "$") if pd.notna(ultimo_valor) else "N/A")
+            st.metric(tr("last_period", lang), format_currency(ultimo_valor, "$") if pd.notna(ultimo_valor) else tr("na", lang))
         with c3:
-            st.metric("Melhor periodo", f"{melhor_cresc:.1f}%" if pd.notna(melhor_cresc) else "N/A")
+            st.metric(tr("best_period", lang), f"{melhor_cresc:.1f}%" if pd.notna(melhor_cresc) else tr("na", lang))
         with c4:
-            st.metric("Pior periodo", f"{pior_cresc:.1f}%" if pd.notna(pior_cresc) else "N/A")
+            st.metric(tr("worst_period", lang), f"{pior_cresc:.1f}%" if pd.notna(pior_cresc) else tr("na", lang))
 
         fig_line = px.line(
             resultado,
@@ -962,14 +1272,14 @@ try:
         st.plotly_chart(fig_line, width="stretch")
 
     with tab_pareto:
-        st.caption("Concentracao de receita para identificar dependencias e oportunidades de diversificacao.")
+        st.caption(tr("cap_pareto", lang))
         if dim_concentracao and dim_concentracao in df_analise.columns:
             pareto_df = compute_pareto(df_analise, dim_concentracao, coluna_valor)
-            fig_pareto = build_pareto_chart(pareto_df, dim_concentracao, top_n=top_n_pareto)
+            fig_pareto = build_pareto_chart(pareto_df, dim_concentracao, top_n=top_n_pareto, lang=lang)
             st.plotly_chart(fig_pareto, width="stretch")
 
             if top3_labels:
-                st.caption(f"Top 3 em {dim_concentracao}: {top3_labels}")
+                st.caption(tr("pareto_top3_caption", lang, dim=dim_concentracao, labels=top3_labels))
 
             show_df = pareto_df.copy()
             show_df["total"] = show_df["total"].apply(lambda x: format_currency(x, "$"))
@@ -981,10 +1291,10 @@ try:
                 hide_index=True,
             )
         else:
-            st.info("Selecione uma dimensao categorica para habilitar Pareto.")
+            st.info(tr("pareto_enable", lang))
 
     with tab_yoy:
-        st.caption("Comparacao ano contra ano para validar consistencia da expansao.")
+        st.caption(tr("cap_yoy", lang))
         yoy_df = compute_yoy(df_analise, coluna_data, coluna_valor, freq="ME")
 
         yy1, yy2, yy3 = st.columns(3)
@@ -993,11 +1303,11 @@ try:
         yoy_abs_last = yoy_df["yoy_abs"].iloc[-1] if len(yoy_df) else np.nan
 
         with yy1:
-            st.metric("Total (ultimo mes)", format_currency(total_ultimo, "$") if pd.notna(total_ultimo) else "N/A")
+            st.metric(tr("total_last_month", lang), format_currency(total_ultimo, "$") if pd.notna(total_ultimo) else tr("na", lang))
         with yy2:
-            st.metric("YoY % (ultimo mes)", f"{yoy_pct_last:.2f}%" if pd.notna(yoy_pct_last) else "N/A")
+            st.metric(tr("yoy_last_month", lang), f"{yoy_pct_last:.2f}%" if pd.notna(yoy_pct_last) else tr("na", lang))
         with yy3:
-            st.metric("YoY abs (ultimo mes)", format_currency(yoy_abs_last, "$") if pd.notna(yoy_abs_last) else "N/A")
+            st.metric(tr("yoy_abs_last_month", lang), format_currency(yoy_abs_last, "$") if pd.notna(yoy_abs_last) else tr("na", lang))
 
         x_axis = yoy_df.columns[0] if not yoy_df.empty else None
         fig_yoy = go.Figure()
@@ -1045,10 +1355,10 @@ try:
             )
             st.dataframe(yoy_styler, width="stretch", hide_index=True)
         else:
-            st.info("Ainda nao ha historico suficiente para tabela YoY.")
+            st.info(tr("yoy_no_history", lang))
 
     with tab_data:
-        st.caption("Camada analitica para auditoria e compartilhamento da analise.")
+        st.caption(tr("cap_data", lang))
         tabela = resultado.rename(
             columns={
                 coluna_data: "Periodo",
@@ -1085,25 +1395,26 @@ try:
 
         csv_data = resultado.to_csv(index=False)
         st.download_button(
-            label="Download CSV (crescimento)",
+            label=tr("download_csv", lang),
             data=csv_data,
             file_name=f"analise_crescimento_{datetime.now().strftime('%Y%m%d')}.csv",
             mime="text/csv",
         )
 
 except Exception as e:
-    st.error(f"Erro na analise: {str(e)}")
+    st.error(tr("analysis_error", st.session_state.get("lang", "en"), error=str(e)))
     st.exception(e)
 
 st.markdown("---")
 st.markdown(
     f"""
 <div style='text-align:center; color:#334155; padding:0.8rem;'>
-    Desenvolvido por <a href='https://github.com/samuelmaia-analytics' target='_blank'>Samuel Maia</a>
+    {tr("footer", st.session_state.get("lang", "en"))} <a href='https://github.com/samuelmaia-analytics' target='_blank'>Samuel Maia</a>
 </div>
 """,
     unsafe_allow_html=True,
 )
+
 
 
 
