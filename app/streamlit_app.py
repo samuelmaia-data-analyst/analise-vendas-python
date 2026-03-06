@@ -316,6 +316,18 @@ def inject_css() -> None:
     [data-testid="stSidebar"] .stFileUploader * {
         color: #f8fafc !important;
     }
+    [data-testid="stSidebar"] div[data-baseweb="select"] * {
+        color: #f8fafc !important;
+    }
+    [data-testid="stSidebar"] div[data-baseweb="select"] {
+        background-color: #0f172a !important;
+        border-radius: 8px;
+    }
+    [data-testid="stSidebar"] input,
+    [data-testid="stSidebar"] textarea {
+        color: #f8fafc !important;
+        background-color: #0f172a !important;
+    }
     [data-testid="stMetric"] {
         background: var(--surface);
         border: 1px solid var(--line);
