@@ -310,6 +310,12 @@ def inject_css() -> None:
     [data-testid="stSidebar"] > div:first-child {
         background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
     }
+    [data-testid="stSidebar"] * {
+        color: var(--ink-900) !important;
+    }
+    [data-testid="stSidebar"] .stFileUploader * {
+        color: #f8fafc !important;
+    }
     [data-testid="stMetric"] {
         background: var(--surface);
         border: 1px solid var(--line);
@@ -322,6 +328,19 @@ def inject_css() -> None:
         letter-spacing: 0.04em;
         font-size: 0.72rem;
         font-weight: 700;
+        color: #64748b !important;
+    }
+    [data-testid="stMetricValue"] {
+        color: var(--ink-900) !important;
+        font-weight: 760 !important;
+    }
+    [data-testid="stMetricDelta"] {
+        color: #0f766e !important;
+    }
+    [data-testid="stMarkdownContainer"] p,
+    [data-testid="stMarkdownContainer"] li,
+    [data-testid="stMarkdownContainer"] span {
+        color: var(--ink-900);
     }
     .section-card {
         background: var(--surface);
