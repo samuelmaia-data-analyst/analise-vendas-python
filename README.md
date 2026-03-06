@@ -1,6 +1,6 @@
 ﻿# Sales Analytics Dashboard (International)
 
-[![CI](https://github.com/samuelmaia-data-analyst/analise-vendas-python/actions/workflows/ci.yml/badge.svg)](https://github.com/samuelmaia-data-analyst/analise-vendas-python/actions/workflows/ci.yml)
+[![CI](https://github.com/samuelmaia-analytics/analise-vendas-python/actions/workflows/ci.yml/badge.svg)](https://github.com/samuelmaia-analytics/analise-vendas-python/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
 
@@ -14,8 +14,8 @@ Language: [Português (Brasil)](README.pt-BR.md)
 
 ## Quick Links
 
-- Repository: [samuelmaia-data-analyst/analise-vendas-python](https://github.com/samuelmaia-data-analyst/analise-vendas-python)
-- CI Workflow: [GitHub Actions - CI](https://github.com/samuelmaia-data-analyst/analise-vendas-python/actions/workflows/ci.yml)
+- Repository: [samuelmaia-analytics/analise-vendas-python](https://github.com/samuelmaia-analytics/analise-vendas-python)
+- CI Workflow: [GitHub Actions - CI](https://github.com/samuelmaia-analytics/analise-vendas-python/actions/workflows/ci.yml)
 - Live App: [Streamlit Deploy](https://analys-vendas-python.streamlit.app/)
 - LinkedIn: [samuelmaia-analytics](https://linkedin.com/in/samuelmaia-analytics)
 - Portuguese README: [README.pt-BR.md](README.pt-BR.md)
@@ -131,7 +131,7 @@ task quality
 
 - Current version: `0.2.0` ([VERSION](VERSION))
 - Change history: [CHANGELOG.md](CHANGELOG.md)
-- Official releases: [GitHub Releases](https://github.com/samuelmaia-data-analyst/analise-vendas-python/releases)
+- Official releases: [GitHub Releases](https://github.com/samuelmaia-analytics/analise-vendas-python/releases)
 
 ## Governance
 

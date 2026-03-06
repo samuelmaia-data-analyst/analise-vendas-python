@@ -915,7 +915,7 @@ try:
 4. Explore crescimento, Pareto e YoY
 
 **Autor:** Samuel Maia
-**Projeto:** https://github.com/samuelmaia-data-analyst/analise-vendas-python
+**Projeto:** https://github.com/samuelmaia-analytics/analise-vendas-python
 """
         )
 
@@ -933,7 +933,7 @@ st.markdown("---")
 st.markdown(
     f"""
 <div style='text-align: center; color: #666; padding: 1rem;'>
-    Desenvolvido por <a href='https://github.com/samuelmaia-data-analyst' target='_blank'>Samuel Maia</a> |
+    Desenvolvido por <a href='https://github.com/samuelmaia-analytics' target='_blank'>Samuel Maia</a> |
     Última atualização: {datetime.now().strftime('%d/%m/%Y %H:%M')}
 </div>
 """,
