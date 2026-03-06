@@ -1042,7 +1042,7 @@ try:
                     "yoy_abs": lambda x: format_currency(x, "$") if pd.notna(x) else "-",
                     "yoy_pct": lambda x: f"{x:.2f}%" if pd.notna(x) else "-",
                 }
-            ).background_gradient(subset=["yoy_pct"], cmap="RdYlGn")
+            )
             st.dataframe(yoy_styler, width="stretch", hide_index=True)
         else:
             st.info("Ainda nao ha historico suficiente para tabela YoY.")
@@ -1062,7 +1062,7 @@ try:
                 "Vendas totais": lambda x: format_currency(x, "$"),
                 "Crescimento": lambda x: f"{x:.2f}%" if pd.notna(x) else "-",
             }
-        ).background_gradient(subset=["Crescimento"], cmap="RdYlGn")
+        )
 
         st.dataframe(tabela_styler, width="stretch", hide_index=True)
 
