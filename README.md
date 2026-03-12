@@ -23,6 +23,7 @@ Language: [Português (Brasil)](README.pt-BR.md)
 - Version: [VERSION](VERSION)
 - Documentation Index: [docs/README.md](docs/README.md)
 - Engineering Standards: [docs/engineering_standards.md](docs/engineering_standards.md)
+- Architecture: [docs/architecture.md](docs/architecture.md)
 - Structure Print View: [docs/print_view.md](docs/print_view.md)
 - Data Dictionary: [docs/data_dictionary.md](docs/data_dictionary.md)
 
@@ -109,10 +110,18 @@ Legacy compatibility folders were isolated under `legacy/` and are still support
 ## Quick Start
 
 ```bash
-pip install -r requirements.txt -r requirements-dev.txt
+pip install -e ".[dev]"
+cp .env.example .env
 pre-commit install
 make quality
 streamlit run app.py
+```
+
+Official CLI commands:
+
+```bash
+sales-analytics growth --period M
+sales-analytics build-artifacts
 ```
 
 ## Streamlit Cloud Deploy (Stable Config)
@@ -150,7 +159,7 @@ task quality
 
 ## Release Management
 
-- Current version: `0.2.0` ([VERSION](VERSION))
+- Current version: `0.3.0` ([VERSION](VERSION))
 - Change history: [CHANGELOG.md](CHANGELOG.md)
 - Official releases: [GitHub Releases](https://github.com/samuelmaia-analytics/analise-vendas-python/releases)
 
@@ -158,7 +167,9 @@ task quality
 
 - Contribution guide: [CONTRIBUTING.md](CONTRIBUTING.md)
 - Security policy: [SECURITY.md](SECURITY.md)
+- Environment template: [.env.example](.env.example)
 - Engineering standards: [docs/engineering_standards.md](docs/engineering_standards.md)
+- Architecture decision summary: [docs/architecture.md](docs/architecture.md)
 - Project structure print view: [docs/print_view.md](docs/print_view.md)
 
 ## Data Dictionary

@@ -1,3 +1,41 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sales-analytics-portfolio"
+version = "0.3.0"
+description = "Sales analytics portfolio project with reusable domain logic, quality gates, and Streamlit delivery."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "streamlit>=1.28.0",
+  "pandas>=2.0.0",
+  "plotly>=5.18.0",
+  "numpy>=1.24.0",
+  "openpyxl>=3.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.2.0",
+  "pytest-cov>=5.0.0",
+  "ruff>=0.6.0",
+  "pre-commit>=3.8.0",
+  "mypy>=1.11.0",
+]
+
+[project.scripts]
+sales-analytics = "src.sales_analytics.cli:main"
+sales-analytics-dashboard = "src.sales_analytics.app_runner:run_streamlit_app"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src", "src.*", "app", "app.*"]
+
 [tool.ruff]
 target-version = "py310"
 exclude = [
@@ -13,7 +51,7 @@ testpaths = ["tests"]
 
 [tool.mypy]
 python_version = "3.10"
-files = ["src"]
+files = ["src", "app.py", "scripts"]
 ignore_missing_imports = true
 warn_redundant_casts = true
 warn_unused_ignores = true

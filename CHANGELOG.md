@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog and this project follows Semantic Versioning.
 
+## [0.3.0] - 2026-03-12
+
+### Added
+- Installable package metadata and official CLI commands for growth analysis and artifact generation.
+- Architecture documentation and `.env.example` for safer onboarding.
+- Contract tests for processed artifacts and negative-path coverage for metrics/artifacts.
+
+### Changed
+- Streamlit now consumes shared domain logic from `src/sales_analytics/` instead of the legacy analysis script.
+- Local and CI setup now install the project in editable mode with optional dev dependencies.
+
 ## [0.2.0] - 2026-03-06
 
 ### Added

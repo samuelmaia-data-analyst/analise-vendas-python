@@ -1,3 +1,5 @@
-"""Core package for sales analytics project."""
+"""Backward-compatible exports for the sales analytics package."""
 
-__version__ = "0.1.0"
+from .sales_analytics import __version__
+
+__all__ = ["__version__"]

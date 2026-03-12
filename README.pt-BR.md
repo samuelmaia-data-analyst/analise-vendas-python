@@ -23,6 +23,7 @@ Idioma: [English](README.md)
 - Versão: [VERSION](VERSION)
 - Índice de documentação: [docs/README.md](docs/README.md)
 - Padrões de engenharia: [docs/engineering_standards.md](docs/engineering_standards.md)
+- Arquitetura: [docs/architecture.md](docs/architecture.md)
 - Print view da estrutura: [docs/print_view.md](docs/print_view.md)
 - Dicionário de dados: [docs/data_dictionary.md](docs/data_dictionary.md)
 
@@ -109,10 +110,18 @@ Pastas legadas foram isoladas em `legacy/` e continuam suportadas por fallback (
 ## <a id="execucao-rapida"></a>Execução Rápida
 
 ```bash
-pip install -r requirements.txt -r requirements-dev.txt
+pip install -e ".[dev]"
+cp .env.example .env
 pre-commit install
 make quality
 streamlit run app.py
+```
+
+Comandos oficiais de CLI:
+
+```bash
+sales-analytics growth --period M
+sales-analytics build-artifacts
 ```
 
 ## Deploy no Streamlit Cloud (Configuração Estável)
@@ -150,7 +159,7 @@ task quality
 
 ## <a id="gestao-de-releases"></a>Gestão de Releases
 
-- Versão atual: `0.2.0` ([VERSION](VERSION))
+- Versão atual: `0.3.0` ([VERSION](VERSION))
 - Histórico de mudanças: [CHANGELOG.md](CHANGELOG.md)
 - Releases oficiais: [GitHub Releases](https://github.com/samuelmaia-analytics/analise-vendas-python/releases)
 
@@ -158,7 +167,9 @@ task quality
 
 - Guia de contribuição: [CONTRIBUTING.md](CONTRIBUTING.md)
 - Política de segurança: [SECURITY.md](SECURITY.md)
+- Template de ambiente: [.env.example](.env.example)
 - Padrões de engenharia: [docs/engineering_standards.md](docs/engineering_standards.md)
+- Resumo de arquitetura: [docs/architecture.md](docs/architecture.md)
 - Print view da estrutura: [docs/print_view.md](docs/print_view.md)
 
 ## <a id="dicionario-de-dados"></a>Dicionário de Dados

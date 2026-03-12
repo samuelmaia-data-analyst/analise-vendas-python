@@ -1,9 +1,7 @@
 import os
 import csv as csvlib
-from contextlib import redirect_stdout
 from datetime import datetime
 from io import BytesIO
-from io import StringIO
 
 import numpy as np
 import pandas as pd
@@ -11,7 +9,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
-from scripts.analise_crescimento import calcular_crescimento
+from src.sales_analytics.metrics import compute_growth_over_period
 
 APP_TITLE = "Revenue Intelligence - Samuel Maia"
 APP_ICON = ":bar_chart:"
@@ -543,15 +541,12 @@ def calcular_crescimento_cached(
     coluna_valor: str,
     periodo: str,
 ) -> pd.DataFrame:
-    # Silencia logs verbosos da rotina legada para evitar overhead em reruns.
-    sink = StringIO()
-    with redirect_stdout(sink):
-        return calcular_crescimento(
-            df.copy(),
-            coluna_data=coluna_data,
-            coluna_valor=coluna_valor,
-            periodo=periodo,
-        )
+    return compute_growth_over_period(
+        df=df.copy(),
+        date_col=coluna_data,
+        sales_col=coluna_valor,
+        period=periodo,
+    )
 
 
 def build_pareto_chart(
