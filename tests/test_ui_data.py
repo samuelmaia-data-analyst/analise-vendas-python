@@ -12,6 +12,7 @@ from app.ui.data import (
     safe_to_datetime,
     safe_to_numeric,
     suggest_dimension_columns,
+    validate_upload_frame,
 )
 
 
@@ -57,3 +58,14 @@ def test_carregar_csv_upload_detects_separator_and_parses_rows():
 def test_carregar_csv_upload_rejects_invalid_payload():
     with pytest.raises(ValueError, match="Nao foi possivel ler o CSV enviado"):
         carregar_csv_upload(b"only-one-column-without-delimiter")
+
+
+def test_validate_upload_frame_enforces_operational_limits():
+    valid_df = pd.DataFrame({"A": [1, 2], "B": [3, 4]})
+    assert validate_upload_frame(valid_df, max_rows=10, max_columns=5) == (True, None)
+
+    too_many_rows = pd.DataFrame({"A": range(3)})
+    assert validate_upload_frame(too_many_rows, max_rows=2, max_columns=5) == (False, "too_many_rows")
+
+    too_many_columns = pd.DataFrame({"A": [1], "B": [2], "C": [3]})
+    assert validate_upload_frame(too_many_columns, max_rows=10, max_columns=2) == (False, "too_many_columns")

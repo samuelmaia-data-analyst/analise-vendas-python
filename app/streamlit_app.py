@@ -39,9 +39,12 @@ from app.ui.data import (
     safe_to_datetime,
     safe_to_numeric,
     suggest_dimension_columns,
+    validate_upload_frame,
 )
 from app.ui.i18n import LANG_OPTIONS, tr
+from src.sales_analytics.settings import get_app_settings
 
+SETTINGS = get_app_settings()
 
 st.set_page_config(
     page_title=APP_TITLE,
@@ -67,7 +70,7 @@ with st.sidebar:
     if uploaded_file is not None:
         file_bytes = uploaded_file.getvalue()
         file_size_mb = len(file_bytes) / (1024 * 1024)
-        if file_size_mb > 40:
+        if file_size_mb > SETTINGS.max_upload_mb:
             st.error(tr("file_too_large", lang, size=file_size_mb))
             st.stop()
 
@@ -85,6 +88,17 @@ with st.sidebar:
 
         if df.empty:
             st.error(tr("empty_file", lang))
+            st.stop()
+        is_valid_upload, upload_error = validate_upload_frame(
+            df,
+            max_rows=SETTINGS.max_upload_rows,
+            max_columns=SETTINGS.max_upload_columns,
+        )
+        if not is_valid_upload and upload_error == "too_many_rows":
+            st.error(tr("file_too_many_rows", lang, limit=SETTINGS.max_upload_rows))
+            st.stop()
+        if not is_valid_upload and upload_error == "too_many_columns":
+            st.error(tr("file_too_many_columns", lang, limit=SETTINGS.max_upload_columns))
             st.stop()
 
         dados_reais = True

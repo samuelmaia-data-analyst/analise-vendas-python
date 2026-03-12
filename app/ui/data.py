@@ -176,3 +176,13 @@ def carregar_csv_upload(file_bytes: bytes) -> pd.DataFrame:
                 last_error = exc
 
     raise ValueError(f"Nao foi possivel ler o CSV enviado. Erro: {last_error}")
+
+
+def validate_upload_frame(df: pd.DataFrame, *, max_rows: int, max_columns: int) -> tuple[bool, str | None]:
+    if df.empty:
+        return False, "empty"
+    if len(df) > max_rows:
+        return False, "too_many_rows"
+    if len(df.columns) > max_columns:
+        return False, "too_many_columns"
+    return True, None

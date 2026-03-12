@@ -133,6 +133,7 @@ sales-analytics build-artifacts
 
 Notes:
 - `app.py` is the official entrypoint and delegates execution to `app/streamlit_app.py`.
+- Upload guardrails are configured via `.env` (`MAX_UPLOAD_MB`, `MAX_UPLOAD_ROWS`, `MAX_UPLOAD_COLUMNS`).
 - If the app was deleted/recreated, use a new app URL/subdomain.
 - After relevant code updates, use `Reboot app` and `Clear cache` in Streamlit Cloud.
 

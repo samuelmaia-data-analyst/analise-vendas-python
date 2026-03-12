@@ -20,3 +20,9 @@ Security reports are accepted for:
 - Application code in `app/` and `src/`
 - Dependency configuration files
 - CI workflow definitions
+
+## Operational Safeguards
+
+- Upload limits are enforced through environment-backed settings: `MAX_UPLOAD_MB`, `MAX_UPLOAD_ROWS`, and `MAX_UPLOAD_COLUMNS`.
+- CSV uploads are parsed defensively with delimiter/encoding detection and invalid-line skipping.
+- The dashboard rejects oversized or malformed uploads before analysis starts.
