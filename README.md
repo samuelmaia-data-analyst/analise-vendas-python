@@ -1,8 +1,10 @@
 ﻿# Sales Analytics Dashboard (International)
 
 [![CI](https://github.com/samuelmaia-analytics/analise-vendas-python/actions/workflows/ci.yml/badge.svg)](https://github.com/samuelmaia-analytics/analise-vendas-python/actions/workflows/ci.yml)
+[![Release](https://github.com/samuelmaia-analytics/analise-vendas-python/actions/workflows/release.yml/badge.svg)](https://github.com/samuelmaia-analytics/analise-vendas-python/actions/workflows/release.yml)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
+![Coverage Gate](https://img.shields.io/badge/Coverage%20Gate-80%25-brightgreen)
 
 Language: [Português (Brasil)](README.pt-BR.md)
 
@@ -164,6 +166,7 @@ task quality
 - Change history: [CHANGELOG.md](CHANGELOG.md)
 - Official releases: [GitHub Releases](https://github.com/samuelmaia-analytics/analise-vendas-python/releases)
 - Consistency check: `python scripts/check_version_sync.py`
+- Changelog validation: `python scripts/check_changelog.py`
 - Release preparation: `python scripts/bump_version.py --part patch` or GitHub Actions `Prepare Release`
 
 ## Governance

@@ -1,8 +1,10 @@
 ﻿# Dashboard de Análise de Vendas (PT-BR)
 
 [![CI](https://github.com/samuelmaia-analytics/analise-vendas-python/actions/workflows/ci.yml/badge.svg)](https://github.com/samuelmaia-analytics/analise-vendas-python/actions/workflows/ci.yml)
+[![Release](https://github.com/samuelmaia-analytics/analise-vendas-python/actions/workflows/release.yml/badge.svg)](https://github.com/samuelmaia-analytics/analise-vendas-python/actions/workflows/release.yml)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
+![Coverage Gate](https://img.shields.io/badge/Coverage%20Gate-80%25-brightgreen)
 
 Idioma: [English](README.md)
 

@@ -1,4 +1,4 @@
-.PHONY: setup lint type linkcheck test test-cov quality run precommit release-check release-bump-patch
+.PHONY: setup lint type linkcheck test test-cov quality run precommit release-check release-bump-patch changelog-check
 
 setup:
 	pip install -e ".[dev]"
@@ -16,13 +16,16 @@ linkcheck:
 release-check:
 	python scripts/check_version_sync.py
 
+changelog-check:
+	python scripts/check_changelog.py
+
 test:
 	pytest
 
 test-cov:
 	pytest --cov=src --cov-report=term-missing --cov-fail-under=80
 
-quality: lint type linkcheck release-check test
+quality: lint type linkcheck release-check changelog-check test
 
 run:
 	streamlit run app.py

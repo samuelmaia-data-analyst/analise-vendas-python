@@ -30,7 +30,9 @@ jobs:
         run: python scripts/bump_version.py --version "${{ inputs.version }}"
 
       - name: Validate release metadata
-        run: python scripts/check_version_sync.py
+        run: |
+          python scripts/check_version_sync.py
+          python scripts/check_changelog.py
 
       - name: Commit release preparation
         run: |

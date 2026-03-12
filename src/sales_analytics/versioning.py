@@ -7,6 +7,8 @@ from pathlib import Path
 from .config import project_root
 
 SEMVER_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
+CHANGELOG_SECTION_RE = re.compile(r"^## \[(?P<version>[^\]]+)\] - (?P<date>\d{4}-\d{2}-\d{2})$", re.MULTILINE)
+CHANGELOG_SUBSECTION_RE = re.compile(r"^### (?P<section>Added|Changed|Fixed|Removed|Security|Deprecated)$", re.MULTILINE)
 
 
 @dataclass(frozen=True)
@@ -89,6 +91,29 @@ def write_version_files(new_version: str) -> None:
 def changelog_has_version(version: str) -> bool:
     changelog = get_version_files().changelog_file.read_text(encoding="utf-8")
     return f"## [{version}]" in changelog
+
+
+def get_latest_changelog_block() -> tuple[str, str]:
+    changelog = get_version_files().changelog_file.read_text(encoding="utf-8")
+    matches = list(CHANGELOG_SECTION_RE.finditer(changelog))
+    if not matches:
+        raise ValueError("CHANGELOG.md does not contain any release sections")
+
+    first = matches[0]
+    end = matches[1].start() if len(matches) > 1 else len(changelog)
+    return first.group("version"), changelog[first.start():end]
+
+
+def validate_changelog_structure(expected_version: str) -> None:
+    latest_version, latest_block = get_latest_changelog_block()
+    if latest_version != expected_version:
+        raise ValueError(
+            f"Latest changelog version {latest_version} does not match expected version {expected_version}"
+        )
+
+    sections = {match.group("section") for match in CHANGELOG_SUBSECTION_RE.finditer(latest_block)}
+    if not sections:
+        raise ValueError("Latest changelog entry must contain at least one subsection such as Added or Changed")
 
 
 def prepend_changelog_stub(version: str, release_date: str) -> None:
