@@ -1,4 +1,4 @@
-.PHONY: setup lint type linkcheck test test-cov quality run precommit
+.PHONY: setup lint type linkcheck test test-cov quality run precommit release-check release-bump-patch
 
 setup:
 	pip install -e ".[dev]"
@@ -13,13 +13,16 @@ type:
 linkcheck:
 	python scripts/check_markdown_links.py
 
+release-check:
+	python scripts/check_version_sync.py
+
 test:
 	pytest
 
 test-cov:
 	pytest --cov=src --cov-report=term-missing --cov-fail-under=80
 
-quality: lint type linkcheck test
+quality: lint type linkcheck release-check test
 
 run:
 	streamlit run app.py
@@ -29,6 +32,9 @@ run-cli:
 
 build-artifacts:
 	sales-analytics build-artifacts
+
+release-bump-patch:
+	python scripts/bump_version.py --part patch
 
 precommit:
 	pre-commit run --all-files

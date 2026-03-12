@@ -163,6 +163,8 @@ task quality
 - Current version: `0.3.0` ([VERSION](VERSION))
 - Change history: [CHANGELOG.md](CHANGELOG.md)
 - Official releases: [GitHub Releases](https://github.com/samuelmaia-analytics/analise-vendas-python/releases)
+- Consistency check: `python scripts/check_version_sync.py`
+- Release preparation: `python scripts/bump_version.py --part patch` or GitHub Actions `Prepare Release`
 
 ## Governance
 
