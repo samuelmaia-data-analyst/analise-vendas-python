@@ -5,6 +5,9 @@ from pathlib import Path
 import pandas as pd
 
 from .config import get_project_paths
+from .logging_utils import get_logger
+
+LOGGER = get_logger(__name__)
 
 REQUIRED_RAW_COLUMNS = {
     "ORDERNUMBER",
@@ -38,6 +41,7 @@ def load_raw_sales(path: Path | None = None) -> pd.DataFrame:
             paths.raw_data_dir / "sales_data_sample.csv",
             paths.legacy_raw_data_dir / "sales_data_sample.csv",
         )
+    LOGGER.info("Carregando base bruta de vendas: %s", csv_path)
     return pd.read_csv(csv_path, encoding="latin-1")
 
 

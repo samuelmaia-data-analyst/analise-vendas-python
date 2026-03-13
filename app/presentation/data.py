@@ -117,18 +117,20 @@ def criar_dados_exemplo() -> pd.DataFrame:
 @st.cache_data
 def carregar_dados() -> tuple[pd.DataFrame, bool, str | None]:
     possiveis_caminhos = [
+        "data/raw/sales_data_sample.csv",
+        "legacy/dados/sales_data_sample.csv",
+        "./data/raw/sales_data_sample.csv",
+        "./legacy/dados/sales_data_sample.csv",
         "data/processed/fato_vendas.csv",
         "legacy/dados_processados/fato_vendas.csv",
-        "data/raw/fato_vendas.csv",
-        "legacy/dados/fato_vendas.csv",
         "./data/processed/fato_vendas.csv",
         "./legacy/dados_processados/fato_vendas.csv",
-        "./data/raw/fato_vendas.csv",
-        "./legacy/dados/fato_vendas.csv",
     ]
     for caminho in possiveis_caminhos:
         if os.path.exists(caminho):
-            return pd.read_csv(caminho), True, caminho
+            df = pd.read_csv(caminho)
+            if "ORDERDATE" in df.columns or "DATA" in df.columns:
+                return df, True, caminho
 
     return criar_dados_exemplo(), False, None
 

@@ -1,80 +1,32 @@
 from __future__ import annotations
 
-import numpy as np
-import pandas as pd
-import streamlit as st
 from typing import Callable
 
-from src.sales_analytics.metrics import compute_growth_over_period
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+import streamlit as st
 
-from app.presentation.data import format_currency, safe_to_datetime, safe_to_numeric
-
-
-def compute_yoy(
-    df: pd.DataFrame,
-    date_col: str,
-    value_col: str,
-    freq: str = "ME",
-) -> pd.DataFrame:
-    tmp = df[[date_col, value_col]].copy()
-    tmp[date_col] = safe_to_datetime(tmp[date_col])
-    tmp[value_col] = safe_to_numeric(tmp[value_col])
-    tmp = tmp.dropna(subset=[date_col, value_col])
-
-    agg = (
-        tmp.set_index(date_col)
-        .resample(freq)[value_col]
-        .sum()
-        .reset_index()
-        .rename(columns={value_col: "total"})
-    )
-    agg["yoy_abs"] = agg["total"] - agg["total"].shift(12)
-    agg["yoy_pct"] = (agg["total"] / agg["total"].shift(12) - 1) * 100
-    return agg
-
-
-def compute_pareto(df: pd.DataFrame, dim_col: str, value_col: str) -> pd.DataFrame:
-    tmp = df[[dim_col, value_col]].copy()
-    tmp[value_col] = safe_to_numeric(tmp[value_col])
-    tmp = tmp.dropna(subset=[dim_col, value_col])
-
-    pareto = (
-        tmp.groupby(dim_col)[value_col]
-        .sum()
-        .sort_values(ascending=False)
-        .reset_index()
-        .rename(columns={value_col: "total"})
-    )
-    total_all = pareto["total"].sum()
-    pareto["share_pct"] = (pareto["total"] / total_all) * 100 if total_all else 0
-    pareto["cum_share_pct"] = pareto["share_pct"].cumsum()
-    pareto["rank"] = np.arange(1, len(pareto) + 1)
-    return pareto
+from app.presentation.components import COLOR_GROWTH, COLOR_REVENUE, COLOR_YOY, PLOT_FONT
+from app.presentation.data import format_currency
+from src.sales_analytics import metrics as sales_metrics
 
 
 @st.cache_data(show_spinner=False)
-def calcular_crescimento_cached(
-    df: pd.DataFrame,
-    coluna_data: str,
-    coluna_valor: str,
-    periodo: str,
-) -> pd.DataFrame:
-    return compute_growth_over_period(
-        df=df.copy(),
-        date_col=coluna_data,
-        sales_col=coluna_valor,
-        period=periodo,
-    )
+def cache_dataframe(data: pd.DataFrame) -> pd.DataFrame:
+    return data.copy()
+
+
+def compute_pareto(df: pd.DataFrame, dim_col: str, value_col: str) -> pd.DataFrame:
+    return sales_metrics.compute_pareto(df, dim_col, value_col)
+
+
+def compute_yoy(df: pd.DataFrame, date_col: str, value_col: str, freq: str = "ME") -> pd.DataFrame:
+    return sales_metrics.compute_yoy(df, date_col, value_col, freq=freq)
 
 
 def format_period_label(value: object) -> str:
-    try:
-        parsed = pd.to_datetime(str(value), errors="coerce")
-        if pd.notna(parsed):
-            return parsed.strftime("%Y-%m")
-    except Exception:
-        pass
-    return str(value)
+    return sales_metrics.format_period_label(value)
 
 
 def build_executive_insights(
@@ -92,9 +44,8 @@ def build_executive_insights(
         tr("insight_peak", lang, value=mes_pico),
     ]
 
-    if pd.notna(crescimento_medio):
-        direcao = tr("expansion", lang) if crescimento_medio >= 0 else tr("retraction", lang)
-        insights.append(tr("insight_growth", lang, direction=direcao, value=crescimento_medio))
+    direcao = tr("expansion", lang) if crescimento_medio >= 0 else tr("retraction", lang)
+    insights.append(tr("insight_growth", lang, direction=direcao, value=crescimento_medio))
 
     if top3_share is not None:
         insights.append(tr("insight_top3", lang, value=top3_share))
@@ -121,3 +72,75 @@ def classify_concentration_signal(value: float | None, lang: str, tr: Callable[.
     if value <= 70:
         return tr("risk_moderate", lang), "signal-warn"
     return tr("risk_high", lang), "signal-risk"
+
+
+def build_revenue_chart(periodic_sales: pd.DataFrame, x_col: str) -> go.Figure:
+    fig = px.area(periodic_sales, x=x_col, y="total_vendas", template="plotly_white")
+    fig.update_traces(line_color=COLOR_REVENUE)
+    fig.update_layout(
+        title="Receita por periodo",
+        xaxis_title="Periodo",
+        yaxis_title="Receita",
+        hovermode="x unified",
+        height=400,
+        font=dict(family=PLOT_FONT),
+        margin=dict(l=10, r=10, t=45, b=10),
+    )
+    return fig
+
+
+def build_growth_chart(periodic_sales: pd.DataFrame, x_col: str) -> go.Figure:
+    fig = px.bar(
+        periodic_sales.dropna(subset=["crescimento_%"]),
+        x=x_col,
+        y="crescimento_%",
+        template="plotly_white",
+    )
+    fig.add_hline(y=0, line_dash="dash", line_color="gray", opacity=0.6)
+    fig.update_traces(marker_color=COLOR_GROWTH)
+    fig.update_layout(
+        title="Crescimento por periodo",
+        xaxis_title="Periodo",
+        yaxis_title="Crescimento (%)",
+        height=400,
+        font=dict(family=PLOT_FONT),
+        margin=dict(l=10, r=10, t=45, b=10),
+    )
+    return fig
+
+
+def build_yoy_chart(yoy_sales: pd.DataFrame) -> go.Figure:
+    fig = go.Figure()
+    if not yoy_sales.empty:
+        x_col = yoy_sales.columns[0]
+        fig.add_trace(
+            go.Scatter(
+                x=yoy_sales[x_col],
+                y=yoy_sales["total"],
+                mode="lines+markers",
+                name="Total mensal",
+                line=dict(color=COLOR_REVENUE, width=3),
+            )
+        )
+        fig.add_trace(
+            go.Scatter(
+                x=yoy_sales[x_col],
+                y=yoy_sales["yoy_pct"],
+                mode="lines+markers",
+                name="YoY (%)",
+                yaxis="y2",
+                line=dict(color=COLOR_YOY, width=2.5),
+            )
+        )
+
+    fig.update_layout(
+        template="plotly_white",
+        height=430,
+        xaxis_title="Mes",
+        yaxis=dict(title="Total mensal"),
+        yaxis2=dict(title="YoY (%)", overlaying="y", side="right"),
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+        font=dict(family=PLOT_FONT),
+        margin=dict(l=30, r=30, t=30, b=30),
+    )
+    return fig

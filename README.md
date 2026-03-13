@@ -1,187 +1,125 @@
-﻿# Sales Analytics Dashboard (International)
+# Python Sales Analytics
 
 [![CI](https://github.com/samuelmaia-analytics/analise-vendas-python/actions/workflows/ci.yml/badge.svg)](https://github.com/samuelmaia-analytics/analise-vendas-python/actions/workflows/ci.yml)
-[![Release](https://github.com/samuelmaia-analytics/analise-vendas-python/actions/workflows/release.yml/badge.svg)](https://github.com/samuelmaia-analytics/analise-vendas-python/actions/workflows/release.yml)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
-![Coverage Gate](https://img.shields.io/badge/Coverage%20Gate-80%25-brightgreen)
+![Coverage](https://img.shields.io/badge/Coverage-90%25-brightgreen)
 
-Language: [Português (Brasil)](README.pt-BR.md)
+Language: [Portuguese (Brazil)](README.pt-BR.md)
 
-## Executive Impact Snapshot
+## Business view
 
-- Converts raw sales records into a decision-ready analytics layer for revenue monitoring.
-- Reduces executive reporting friction by centralizing KPIs, YoY trends, and Pareto concentration in one operational view.
-- Improves leadership cadence with reproducible outputs (tests + CI + documented data contract).
+This project turns a raw sales dataset into a decision-ready analysis flow focused on a few management questions:
 
-## Quick Links
+- how much revenue was generated
+- whether revenue is expanding or slowing down
+- which periods performed best and worst
+- how concentrated revenue is across product lines, products, or customers
+- how trustworthy the dataset is before the analysis is consumed
 
-- Repository: [samuelmaia-analytics/analise-vendas-python](https://github.com/samuelmaia-analytics/analise-vendas-python)
-- CI Workflow: [GitHub Actions - CI](https://github.com/samuelmaia-analytics/analise-vendas-python/actions/workflows/ci.yml)
-- Live App: [Streamlit Deploy](https://analys-vendas-python.streamlit.app/)
-- LinkedIn: [samuelmaia-analytics](https://linkedin.com/in/samuelmaia-analytics)
-- Portuguese README: [README.pt-BR.md](README.pt-BR.md)
-- Changelog: [CHANGELOG.md](CHANGELOG.md)
-- Version: [VERSION](VERSION)
-- Documentation Index: [docs/README.md](docs/README.md)
-- Engineering Standards: [docs/engineering_standards.md](docs/engineering_standards.md)
-- Architecture: [docs/architecture.md](docs/architecture.md)
-- Structure Print View: [docs/print_view.md](docs/print_view.md)
-- Data Dictionary: [docs/data_dictionary.md](docs/data_dictionary.md)
+The goal is not unnecessary sophistication. The goal is a cleaner portfolio project with stronger structure, clearer business framing, and a more mature execution flow.
 
-## Table of Contents
+## Sample dataset highlights
 
-- [Executive Summary](#executive-summary)
-- [Architecture and Pipeline](#architecture-and-pipeline)
-- [Engineering Structure](#engineering-structure)
-- [Repository Map](#repository-map)
-- [Quality Gates](#quality-gates)
-- [Quick Start](#quick-start)
-- [Automated Tests](#automated-tests)
-- [Release Management](#release-management)
-- [Governance](#governance)
-- [Data Dictionary](#data-dictionary)
-- [Dataset Source](#dataset-source)
+Calculated from `data/raw/sales_data_sample.csv` on March 13, 2026:
 
-## Executive Summary
+- Total revenue: `10,032,628.85`
+- Unique orders: `307`
+- Average order value: `32,679.57`
+- Average monthly growth: `14.30%`
+- Best period: `2003-10`
+- Worst period: `2003-12`
+- Top 3 `PRODUCTLINE` share: `69.66%`
 
-This project is an end-to-end Sales Analytics solution focused on business decision support.
+Executive takeaway:
+- revenue is materially concentrated in a small set of product lines
+- October 2003 is the strongest acceleration point in the sample
+- December 2003 is the weakest relative period in the trend series
 
-It combines:
-- Revenue and growth KPIs
-- Pareto concentration analysis
-- Monthly Year-over-Year (YoY) tracking
-- Interactive Streamlit dashboard
+## What improved
 
-## Architecture and Pipeline
+- reusable functions separated by responsibility
+- dedicated layers for reading, quality checks, transformation, analytics, and visualization
+- centralized sales KPIs
+- simple logging and error handling
+- more executive chart sequence in the dashboard
+- lightweight test coverage for analytical functions and pipeline behavior
 
-```mermaid
-flowchart LR
-    A[Raw Sales Data<br/>CSV / Kaggle source] --> B[Data Contract Validation<br/>schema and null controls]
-    B --> C[Modeling and Metric Engine<br/>src/artifacts.py + src/metrics.py]
-    C --> D[Processed Data Mart<br/>fato_vendas + dimensions + xlsx]
-    D --> E[Consumption Layer<br/>Streamlit dashboard + reports]
-    C --> F[Quality Gates<br/>pytest + ruff + mypy]
-    F --> G[CI Pipeline<br/>GitHub Actions]
-    G --> H[Release Governance<br/>VERSION + CHANGELOG + GitHub Release]
-```
+## Stack
 
-Systemic perspective:
-- Data reliability: schema contract and deterministic artifact generation.
-- Decision reliability: KPI logic isolated in tested business modules.
-- Operational reliability: CI-enforced quality gates and versioned releases.
+- Python
+- Pandas
+- Plotly
+- Streamlit
+- Pytest
+- Ruff
+- Mypy
 
-## Engineering Structure
+## Project structure
 
 ```text
 .
-├── app/                       # Streamlit UI layer
-├── src/                       # Core business/data logic
-├── tests/                     # Automated tests
+├── app/
+│   ├── streamlit_app.py
+│   └── presentation/
 ├── data/
-│   ├── raw/                   # Source datasets
-│   └── processed/             # Modeled outputs
-├── reports/                   # Business-facing artifacts
-├── scripts/                   # Utility scripts / CLI workflows
-├── .github/workflows/ci.yml   # CI pipeline (ruff + pytest)
-├── requirements.txt
-├── requirements-dev.txt
-└── app.py                     # Entry point
+│   ├── raw/
+│   └── processed/
+├── src/
+│   └── sales_analytics/
+│       ├── cli.py
+│       ├── data_contract.py
+│       ├── quality.py
+│       ├── transformations.py
+│       ├── metrics.py
+│       ├── pipeline.py
+│       └── artifacts.py
+├── tests/
+├── docs/
+└── app.py
 ```
 
-Legacy compatibility folders were isolated under `legacy/` and are still supported by fallback paths (`legacy/dados/`, `legacy/dados_processados/`).
+## Execution flow
 
-## Repository Map
+1. Load the sales dataset.
+2. Validate core quality checks.
+3. Clean and normalize the analytical base.
+4. Compute KPIs, growth, YoY, and concentration.
+5. Present outputs in a business-first dashboard flow.
 
-- Application: [app/](app) and [app.py](app.py)
-- Core logic: [src/](src)
-- Tests: [tests/](tests)
-- Data: [data/raw/](data/raw) and [data/processed/](data/processed)
-- Utility scripts: [scripts/](scripts)
-- Project docs: [docs/](docs) and [reports/](reports)
-- CI and templates: [.github/](.github)
-
-## Quality Gates
-
-- Lint: `ruff check .`
-- Type check: `mypy src`
-- Docs link check: `python scripts/check_markdown_links.py`
-- Tests + coverage gate: `pytest` (minimum coverage: 80% in `src`)
-- Local hooks: `pre-commit`
-
-## Quick Start
+## Run locally
 
 ```bash
 pip install -e ".[dev]"
-cp .env.example .env
-pre-commit install
-make quality
 streamlit run app.py
 ```
 
-Official CLI commands:
+CLI:
 
 ```bash
+sales-analytics summary
 sales-analytics growth --period M
 sales-analytics build-artifacts
 ```
 
-## Streamlit Cloud Deploy (Stable Config)
-
-- Repository: `samuelmaia-analytics/analise-vendas-python`
-- Branch: `main`
-- Main file path: `app.py`
-- Python version: automatic (or 3.11+)
-
-Notes:
-- `app.py` is the official entrypoint and delegates execution to `app/streamlit_app.py`.
-- Upload guardrails are configured via `.env` (`MAX_UPLOAD_MB`, `MAX_UPLOAD_ROWS`, `MAX_UPLOAD_COLUMNS`).
-- If the app was deleted/recreated, use a new app URL/subdomain.
-- After relevant code updates, use `Reboot app` and `Clear cache` in Streamlit Cloud.
-
-## Streamlit Cloud Troubleshooting
-
-- Symptom: black screen / old traceback remains in logs
-  - Action: ensure the app is pointing to `main` + `app.py`, then `Reboot app` and `Clear cache`.
-- Symptom: upload appears to hang
-  - Action: retry with CSV <= 40MB and confirm delimiter (`;` or `,`); parser auto-detect is enabled.
-- Symptom: permission/access issues after account rename
-  - Action: reconnect GitHub in Streamlit Cloud and re-authorize this repository.
-
-Alternative (Taskfile):
+## Quality checks
 
 ```bash
-task quality
+ruff check .
+pytest
+mypy src
 ```
 
-## Automated Tests
+Current automated coverage: `90%`.
 
-- `tests/test_data_schema.py`: validates raw schema contract
-- `tests/test_kpis.py`: validates primary business metrics
-- `tests/test_artifacts.py`: validates processed artifact generation
+## Why this reads as more senior
 
-## Release Management
+- business context is explicit
+- metrics are centralized instead of scattered across the UI
+- data quality is visible, not implicit
+- the main entrypoint stays clean
+- tests support the core analytical logic
 
-- Current version: `0.3.0` ([VERSION](VERSION))
-- Change history: [CHANGELOG.md](CHANGELOG.md)
-- Official releases: [GitHub Releases](https://github.com/samuelmaia-analytics/analise-vendas-python/releases)
-- Consistency check: `python scripts/check_version_sync.py`
-- Changelog validation: `python scripts/check_changelog.py`
-- Release preparation: `python scripts/bump_version.py --part patch` or GitHub Actions `Prepare Release`
+## Data source
 
-## Governance
-
-- Contribution guide: [CONTRIBUTING.md](CONTRIBUTING.md)
-- Security policy: [SECURITY.md](SECURITY.md)
-- Environment template: [.env.example](.env.example)
-- Engineering standards: [docs/engineering_standards.md](docs/engineering_standards.md)
-- Architecture decision summary: [docs/architecture.md](docs/architecture.md)
-- Project structure print view: [docs/print_view.md](docs/print_view.md)
-
-## Data Dictionary
-
-See [docs/data_dictionary.md](docs/data_dictionary.md).
-
-## Dataset Source
-
-Kaggle - [Sample Sales Data](https://www.kaggle.com/datasets/kyanyoga/sample-sales-data)
+Kaggle: [Sample Sales Data](https://www.kaggle.com/datasets/kyanyoga/sample-sales-data)

@@ -49,6 +49,17 @@ def test_compute_growth_over_period_rejects_invalid_period():
         compute_growth_over_period(df, date_col="ORDERDATE", sales_col="SALES", period="W")
 
 
+def test_cli_summary_command_prints_kpis(monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]):
+    monkeypatch.setattr("sys.argv", ["sales-analytics", "summary"])
+
+    exit_code = cli.main()
+
+    output = capsys.readouterr().out
+    assert exit_code == 0
+    assert "receita_total" in output
+    assert "ticket_medio" in output
+
+
 def test_cli_growth_command_prints_csv(monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]):
     monkeypatch.setattr("sys.argv", ["sales-analytics", "growth", "--period", "M"])
 

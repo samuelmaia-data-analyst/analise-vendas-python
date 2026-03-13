@@ -1,183 +1,126 @@
-﻿# Dashboard de Análise de Vendas (PT-BR)
+# Analise de Vendas em Python
 
 [![CI](https://github.com/samuelmaia-analytics/analise-vendas-python/actions/workflows/ci.yml/badge.svg)](https://github.com/samuelmaia-analytics/analise-vendas-python/actions/workflows/ci.yml)
-[![Release](https://github.com/samuelmaia-analytics/analise-vendas-python/actions/workflows/release.yml/badge.svg)](https://github.com/samuelmaia-analytics/analise-vendas-python/actions/workflows/release.yml)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
-![Coverage Gate](https://img.shields.io/badge/Coverage%20Gate-80%25-brightgreen)
+![Coverage](https://img.shields.io/badge/Cobertura-90%25-brightgreen)
 
 Idioma: [English](README.md)
 
-## Impacto Executivo
+## Visao de negocio
 
-- Converte dados brutos de vendas em uma camada analítica pronta para decisão de receita.
-- Reduz atrito de reporte executivo ao consolidar KPIs, tendência YoY e concentração de Pareto em uma única visão operacional.
-- Eleva previsibilidade de gestão com saídas reproduzíveis (testes + CI + contrato de dados documentado).
+Este projeto transforma uma base bruta de vendas em uma leitura executiva simples:
 
-## Links Rápidos
+- quanto a empresa vendeu
+- como a receita evoluiu ao longo do tempo
+- quais periodos concentraram melhor e pior desempenho
+- quanto da receita depende de poucas categorias, produtos ou clientes
+- qual o nivel de qualidade da base antes da tomada de decisao
 
-- Repositório: [samuelmaia-analytics/analise-vendas-python](https://github.com/samuelmaia-analytics/analise-vendas-python)
-- Workflow de CI: [GitHub Actions - CI](https://github.com/samuelmaia-analytics/analise-vendas-python/actions/workflows/ci.yml)
-- Deploy: [Streamlit](https://analys-vendas-python.streamlit.app/)
-- LinkedIn: [samuelmaia-analytics](https://linkedin.com/in/samuelmaia-analytics)
-- README internacional: [README.md](README.md)
-- Changelog: [CHANGELOG.md](CHANGELOG.md)
-- Versão: [VERSION](VERSION)
-- Índice de documentação: [docs/README.md](docs/README.md)
-- Padrões de engenharia: [docs/engineering_standards.md](docs/engineering_standards.md)
-- Arquitetura: [docs/architecture.md](docs/architecture.md)
-- Print view da estrutura: [docs/print_view.md](docs/print_view.md)
-- Dicionário de dados: [docs/data_dictionary.md](docs/data_dictionary.md)
+O objetivo nao e criar uma stack excessivamente sofisticada, e sim apresentar um projeto com criterio de negocio, organizacao de engenharia e fluxo analitico reproduzivel.
 
-## Sumário
+## Principais insights da base amostral
 
-- [Resumo Executivo](#resumo-executivo)
-- [Arquitetura e Pipeline](#arquitetura-e-pipeline)
-- [Estrutura de Engenharia](#estrutura-de-engenharia)
-- [Mapa do Repositório](#mapa-do-repositorio)
-- [Portões de Qualidade](#portoes-de-qualidade)
-- [Execução Rápida](#execucao-rapida)
-- [Testes Automatizados](#testes-automatizados)
-- [Gestão de Releases](#gestao-de-releases)
-- [Governança](#governanca)
-- [Dicionário de Dados](#dicionario-de-dados)
-- [Fonte de Dados](#fonte-de-dados)
+Resultados calculados sobre `data/raw/sales_data_sample.csv` em 13 de marco de 2026:
 
-## <a id="resumo-executivo"></a>Resumo Executivo
+- Receita total: `10.032.628,85`
+- Pedidos unicos: `307`
+- Ticket medio por pedido: `32.679,57`
+- Crescimento medio mensal: `14,30%`
+- Melhor periodo: `2003-10`
+- Pior periodo: `2003-12`
+- Participacao do top 3 em `PRODUCTLINE`: `69,66%`
 
-Este projeto é uma solução end-to-end de Sales Analytics com foco em apoio à decisão de negócio.
+Leitura executiva:
+- a receita esta concentrada em poucas linhas de produto, o que sugere dependencia comercial relevante
+- outubro de 2003 representa o melhor momento de aceleracao da base
+- dezembro de 2003 concentra a maior deterioracao relativa entre periodos
 
-Entrega:
-- KPIs de receita e crescimento
-- Análise de concentração por Pareto
-- Comparação Year-over-Year (YoY) mensal
-- Dashboard interativo em Streamlit
+## O que foi melhorado
 
-## <a id="arquitetura-e-pipeline"></a>Arquitetura e Pipeline
+- fluxo analitico separado em leitura, qualidade, transformacao, metricas e visualizacao
+- KPI centralizado em um modulo unico de negocio
+- validacoes de qualidade de dados antes da analise
+- logging simples para carga, processamento e CLI
+- tratamento de erros para execucao local e dashboard
+- dashboard reorganizado em ordem mais executiva
+- testes cobrindo metricas, pipeline e contratos de dados
 
-```mermaid
-flowchart LR
-    A[Dados Brutos de Vendas<br/>CSV / origem Kaggle] --> B[Validação de Contrato<br/>schema e controles de nulos]
-    B --> C[Motor de Modelagem e Métricas<br/>src/artifacts.py + src/metrics.py]
-    C --> D[Data Mart Processado<br/>fato_vendas + dimensões + xlsx]
-    D --> E[Camada de Consumo<br/>dashboard Streamlit + reports]
-    C --> F[Portões de Qualidade<br/>pytest + ruff + mypy]
-    F --> G[Pipeline de CI<br/>GitHub Actions]
-    G --> H[Governança de Release<br/>VERSION + CHANGELOG + GitHub Release]
-```
+## Stack
 
-Visão sistêmica:
-- Confiabilidade de dados: contrato de schema e geração determinística de artefatos.
-- Confiabilidade de decisão: regras de KPIs isoladas em módulos de negócio testados.
-- Confiabilidade operacional: quality gates em CI e releases versionadas.
+- Python
+- Pandas
+- Plotly
+- Streamlit
+- Pytest
+- Ruff
+- Mypy
 
-## <a id="estrutura-de-engenharia"></a>Estrutura de Engenharia
+## Estrutura do projeto
 
 ```text
 .
-├── app/                       # Camada de interface (Streamlit)
-├── src/                       # Lógica de negócio e dados
-├── tests/                     # Testes automatizados
+├── app/
+│   ├── streamlit_app.py              # dashboard principal
+│   └── presentation/                 # componentes e helpers visuais
 ├── data/
-│   ├── raw/                   # Dados de origem
-│   └── processed/             # Saídas processadas/modeladas
-├── reports/                   # Artefatos para negócio
-├── scripts/                   # Rotinas utilitárias e CLI
-├── .github/workflows/ci.yml   # CI (ruff + pytest)
-├── requirements.txt
-├── requirements-dev.txt
-└── app.py                     # Ponto de entrada
+│   ├── raw/                          # dados de origem
+│   └── processed/                    # artefatos processados
+├── src/
+│   └── sales_analytics/
+│       ├── cli.py                    # fluxo de execucao via terminal
+│       ├── data_contract.py          # leitura e contratos de schema
+│       ├── quality.py                # validacoes de qualidade
+│       ├── transformations.py        # limpeza e preparo analitico
+│       ├── metrics.py                # KPIs e agregacoes centrais
+│       ├── pipeline.py               # orquestracao da analise
+│       └── artifacts.py              # geracao de saidas processadas
+├── tests/                            # testes automatizados
+├── docs/                             # documentacao de apoio
+└── app.py                            # entrypoint limpo
 ```
 
-Pastas legadas foram isoladas em `legacy/` e continuam suportadas por fallback (`legacy/dados/`, `legacy/dados_processados/`) para manter compatibilidade.
+## Fluxo de execucao
 
-## <a id="mapa-do-repositorio"></a>Mapa do Repositório
+1. Ler a base de vendas.
+2. Validar colunas obrigatorias, datas, valores e inconsistencias basicas.
+3. Limpar e padronizar os dados para analise.
+4. Calcular KPIs, crescimento, YoY e concentracao.
+5. Exibir os resultados em uma narrativa visual mais executiva.
 
-- Aplicação: [app/](app) e [app.py](app.py)
-- Lógica central: [src/](src)
-- Testes: [tests/](tests)
-- Dados: [data/raw/](data/raw) e [data/processed/](data/processed)
-- Scripts utilitários: [scripts/](scripts)
-- Documentação: [docs/](docs) e [reports/](reports)
-- CI e templates: [.github/](.github)
-
-## <a id="portoes-de-qualidade"></a>Portões de Qualidade
-
-- Lint: `ruff check .`
-- Tipagem estática: `mypy src`
-- Checagem de links da documentação: `python scripts/check_markdown_links.py`
-- Testes + gate de cobertura: `pytest` (cobertura mínima: 80% em `src`)
-- Hooks locais: `pre-commit`
-
-## <a id="execucao-rapida"></a>Execução Rápida
+## Como executar
 
 ```bash
 pip install -e ".[dev]"
-cp .env.example .env
-pre-commit install
-make quality
 streamlit run app.py
 ```
 
-Comandos oficiais de CLI:
+Fluxo via CLI:
 
 ```bash
+sales-analytics summary
 sales-analytics growth --period M
 sales-analytics build-artifacts
 ```
 
-## Deploy no Streamlit Cloud (Configuração Estável)
-
-- Repositório: `samuelmaia-analytics/analise-vendas-python`
-- Branch: `main`
-- Main file path: `app.py`
-- Versão do Python: automática (ou 3.11+)
-
-Observações:
-- `app.py` é o entrypoint oficial e delega para `app/streamlit_app.py`.
-- Se o app foi excluído/recriado, use um novo subdomínio/URL.
-- Após mudanças relevantes, execute `Reboot app` e `Clear cache` no Streamlit Cloud.
-
-## Troubleshooting Streamlit Cloud
-
-- Sintoma: tela preta / traceback antigo continua
-  - Ação: confirme `main` + `app.py`, depois `Reboot app` e `Clear cache`.
-- Sintoma: upload parece travar
-  - Ação: teste CSV <= 40MB e confirme delimitador (`;` ou `,`); autodetecção está ativa.
-- Sintoma: problema de acesso após troca de usuário
-  - Ação: reconecte o GitHub no Streamlit Cloud e reautorize este repositório.
-
-Alternativa (Taskfile):
+## Testes e qualidade
 
 ```bash
-task quality
+ruff check .
+pytest
+mypy src
 ```
 
-## <a id="testes-automatizados"></a>Testes Automatizados
+Cobertura atual da suite: `90%`.
 
-- `tests/test_data_schema.py`: valida o contrato mínimo de schema da base raw
-- `tests/test_kpis.py`: valida métricas principais de negócio
-- `tests/test_artifacts.py`: valida geração de artefatos processados
+## Diferenciais para recrutadores tecnicos
 
-## <a id="gestao-de-releases"></a>Gestão de Releases
+- contexto de negocio explicito no README e no dashboard
+- separacao clara de responsabilidades no codigo
+- validacao de qualidade antes do calculo de indicadores
+- KPIs centralizados e testados
+- entrada principal simples e facil de demonstrar
 
-- Versão atual: `0.3.0` ([VERSION](VERSION))
-- Histórico de mudanças: [CHANGELOG.md](CHANGELOG.md)
-- Releases oficiais: [GitHub Releases](https://github.com/samuelmaia-analytics/analise-vendas-python/releases)
+## Fonte de dados
 
-## <a id="governanca"></a>Governança
-
-- Guia de contribuição: [CONTRIBUTING.md](CONTRIBUTING.md)
-- Política de segurança: [SECURITY.md](SECURITY.md)
-- Template de ambiente: [.env.example](.env.example)
-- Padrões de engenharia: [docs/engineering_standards.md](docs/engineering_standards.md)
-- Resumo de arquitetura: [docs/architecture.md](docs/architecture.md)
-- Print view da estrutura: [docs/print_view.md](docs/print_view.md)
-
-## <a id="dicionario-de-dados"></a>Dicionário de Dados
-
-Consulte [docs/data_dictionary.md](docs/data_dictionary.md).
-
-## <a id="fonte-de-dados"></a>Fonte de Dados
-
-Kaggle - [Sample Sales Data](https://www.kaggle.com/datasets/kyanyoga/sample-sales-data)
+Kaggle: [Sample Sales Data](https://www.kaggle.com/datasets/kyanyoga/sample-sales-data)
