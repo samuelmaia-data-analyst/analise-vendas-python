@@ -8,6 +8,7 @@ import streamlit as st
 
 from app.presentation.analytics import (
     build_executive_insights,
+    build_recommendations,
     build_growth_chart,
     build_revenue_chart,
     build_yoy_chart,
@@ -209,6 +210,13 @@ try:
         lang=lang,
         tr=tr,
     )
+    recommendations = build_recommendations(
+        average_growth_pct=kpis.average_growth_pct,
+        top3_share_pct=top3_share,
+        valid_rows=analysis.quality_report.valid_rows,
+        total_rows=analysis.quality_report.total_rows,
+        lang=lang,
+    )
 
     crescimento_label, crescimento_class = classify_growth_signal(crescimento_medio, lang, tr)
     concentracao_label, concentracao_class = classify_concentration_signal(top3_share, lang, tr)
@@ -291,6 +299,20 @@ try:
             ]
         )
         st.dataframe(summary_df, width="stretch", hide_index=True)
+
+        if recommendations:
+            st.markdown("#### Recomendacoes executivas")
+            recommendations_df = pd.DataFrame(
+                [
+                    {
+                        "Tema": item["title"],
+                        "Implicacao": item["implication"],
+                        "Acao sugerida": item["action"],
+                    }
+                    for item in recommendations
+                ]
+            )
+            st.dataframe(recommendations_df, width="stretch", hide_index=True)
 
     with tab_trend:
         st.caption("Depois a leitura temporal: performance recorrente, variacao recente e estabilidade.")

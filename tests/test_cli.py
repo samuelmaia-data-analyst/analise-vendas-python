@@ -91,6 +91,25 @@ def test_cli_build_artifacts_command_writes_output(
     assert (tmp_path / "dim_tempo.csv").exists()
 
 
+def test_cli_export_summary_command_writes_report(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    tmp_path: Path,
+):
+    output_file = tmp_path / "executive_summary.csv"
+    monkeypatch.setattr(
+        "sys.argv",
+        ["sales-analytics", "export-summary", "--output", str(output_file)],
+    )
+
+    exit_code = cli.main()
+
+    output = capsys.readouterr().out
+    assert exit_code == 0
+    assert "executive_summary.csv" in output
+    assert output_file.exists()
+
+
 def test_run_streamlit_app_delegates_to_runpy(monkeypatch: pytest.MonkeyPatch):
     called: dict[str, str] = {}
 

@@ -95,13 +95,24 @@ pip install -e ".[dev]"
 streamlit run app.py
 ```
 
+Fluxo oficial:
+
+- demonstracao visual: `streamlit run app.py`
+- resumo executivo no terminal: `sales-analytics summary`
+- artefato para portfólio/recrutador: `sales-analytics export-summary`
+
 Fluxo via CLI:
 
 ```bash
 sales-analytics summary
+sales-analytics export-summary
 sales-analytics growth --period M
 sales-analytics build-artifacts
 ```
+
+Saida executiva gerada para compartilhamento:
+
+- [reports/executive_summary.csv](C:\Users\samue\PycharmProjects\analise-vendas-python\reports\executive_summary.csv)
 
 ## Testes e qualidade
 

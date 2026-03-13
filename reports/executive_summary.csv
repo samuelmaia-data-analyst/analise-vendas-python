@@ -1,0 +1,15 @@
+metric,value
+total_revenue,10032628.85
+total_orders,307
+average_order_value,32679.57
+average_growth_pct,14.3
+last_period_growth_pct,75.0
+best_period,2003-10
+worst_period,2003-12
+peak_month,Nov
+top3_share_pct,69.66
+valid_rows,2823
+duplicate_rows,0
+invalid_date_rows,0
+invalid_sales_rows,0
+negative_sales_rows,0

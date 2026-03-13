@@ -74,6 +74,87 @@ def classify_concentration_signal(value: float | None, lang: str, tr: Callable[.
     return tr("risk_high", lang), "signal-risk"
 
 
+def build_recommendations(
+    *,
+    average_growth_pct: float,
+    top3_share_pct: float | None,
+    valid_rows: int,
+    total_rows: int,
+    lang: str,
+) -> list[dict[str, str]]:
+    recommendations: list[dict[str, str]] = []
+    quality_ratio = (valid_rows / total_rows) if total_rows else 0
+
+    if lang.startswith("pt"):
+        if top3_share_pct is not None and top3_share_pct >= 70:
+            recommendations.append(
+                {
+                    "title": "Reducao de concentracao",
+                    "implication": "A receita depende demais de poucas categorias, o que aumenta risco comercial e de previsibilidade.",
+                    "action": "Mapear o mix das linhas fora do top 3 e priorizar campanhas de diversificacao.",
+                }
+            )
+        if average_growth_pct <= 2:
+            recommendations.append(
+                {
+                    "title": "Recuperar tracao",
+                    "implication": "O crescimento medio esta baixo para sustentar narrativa clara de expansao.",
+                    "action": "Abrir analise por periodo, canal ou produto para localizar a perda de ritmo e atacar o gargalo principal.",
+                }
+            )
+        else:
+            recommendations.append(
+                {
+                    "title": "Sustentar crescimento",
+                    "implication": "Existe tracao de receita, mas ela precisa ser traduzida em rotina de acompanhamento.",
+                    "action": "Formalizar revisao mensal com receita, crescimento, Pareto e YoY como painel padrao de gestao.",
+                }
+            )
+        if quality_ratio < 0.98:
+            recommendations.append(
+                {
+                    "title": "Fortalecer qualidade dos dados",
+                    "implication": "Parte da base precisou ser descartada para analise, reduzindo confianca executiva.",
+                    "action": "Corrigir captura de datas e valores na origem e monitorar ocorrencias invalidas a cada carga.",
+                }
+            )
+    else:
+        if top3_share_pct is not None and top3_share_pct >= 70:
+            recommendations.append(
+                {
+                    "title": "Reduce concentration",
+                    "implication": "Revenue is too dependent on a small set of categories, increasing commercial risk.",
+                    "action": "Review the mix outside the top 3 and prioritize diversification initiatives.",
+                }
+            )
+        if average_growth_pct <= 2:
+            recommendations.append(
+                {
+                    "title": "Recover traction",
+                    "implication": "Average growth is too low to support a strong expansion story.",
+                    "action": "Break performance down by period, channel, or product to locate the main drag factor.",
+                }
+            )
+        else:
+            recommendations.append(
+                {
+                    "title": "Institutionalize the cadence",
+                    "implication": "Revenue has traction, but the monitoring routine should be more explicit.",
+                    "action": "Adopt a monthly review using revenue, growth, Pareto, and YoY as the default operating view.",
+                }
+            )
+        if quality_ratio < 0.98:
+            recommendations.append(
+                {
+                    "title": "Tighten data quality",
+                    "implication": "Part of the dataset had to be discarded before analysis, reducing decision confidence.",
+                    "action": "Fix date and sales capture at the source and track invalid rows on every load.",
+                }
+            )
+
+    return recommendations[:3]
+
+
 def build_revenue_chart(periodic_sales: pd.DataFrame, x_col: str) -> go.Figure:
     fig = px.area(periodic_sales, x=x_col, y="total_vendas", template="plotly_white")
     fig.update_traces(line_color=COLOR_REVENUE)

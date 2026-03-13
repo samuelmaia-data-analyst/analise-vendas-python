@@ -94,13 +94,24 @@ pip install -e ".[dev]"
 streamlit run app.py
 ```
 
+Official flow:
+
+- visual demo: `streamlit run app.py`
+- terminal summary: `sales-analytics summary`
+- recruiter-friendly artifact: `sales-analytics export-summary`
+
 CLI:
 
 ```bash
 sales-analytics summary
+sales-analytics export-summary
 sales-analytics growth --period M
 sales-analytics build-artifacts
 ```
+
+Shareable output artifact:
+
+- [reports/executive_summary.csv](C:\Users\samue\PycharmProjects\analise-vendas-python\reports\executive_summary.csv)
 
 ## Quality checks
 

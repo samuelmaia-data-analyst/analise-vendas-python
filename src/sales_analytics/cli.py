@@ -9,6 +9,7 @@ from .data_contract import load_raw_sales
 from .exceptions import SalesAnalyticsError
 from .logging_utils import get_logger
 from .pipeline import run_sales_analysis
+from .reporting import export_executive_summary
 
 LOGGER = get_logger(__name__)
 
@@ -22,6 +23,13 @@ def build_parser() -> argparse.ArgumentParser:
     summary_parser.add_argument("--sales-col", default="SALES")
     summary_parser.add_argument("--dimension-col", default="PRODUCTLINE")
     summary_parser.add_argument("--period", default="M", choices=["M", "T", "A"])
+
+    export_parser = subparsers.add_parser("export-summary", help="Export an executive summary CSV to the reports folder.")
+    export_parser.add_argument("--date-col", default="ORDERDATE")
+    export_parser.add_argument("--sales-col", default="SALES")
+    export_parser.add_argument("--dimension-col", default="PRODUCTLINE")
+    export_parser.add_argument("--period", default="M", choices=["M", "T", "A"])
+    export_parser.add_argument("--output", default=None)
 
     growth_parser = subparsers.add_parser("growth", help="Compute growth over time from the raw dataset.")
     growth_parser.add_argument("--date-col", default="ORDERDATE")
@@ -67,6 +75,19 @@ def main() -> int:
                 period=args.period,
             )
             print(result.periodic_sales.to_csv(index=False))
+            return 0
+
+        if args.command == "export-summary":
+            result = run_sales_analysis(
+                df=df,
+                date_col=args.date_col,
+                sales_col=args.sales_col,
+                dimension_col=args.dimension_col,
+                period=args.period,
+            )
+            output_path = None if args.output is None else Path(args.output)
+            exported = export_executive_summary(result, output_path=output_path)
+            print(exported)
             return 0
 
         if args.command == "build-artifacts":
