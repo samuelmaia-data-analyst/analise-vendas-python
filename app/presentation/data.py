@@ -3,6 +3,7 @@ from __future__ import annotations
 import csv as csvlib
 import os
 from io import BytesIO
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -128,7 +129,10 @@ def carregar_dados() -> tuple[pd.DataFrame, bool, str | None]:
     ]
     for caminho in possiveis_caminhos:
         if os.path.exists(caminho):
-            df = pd.read_csv(caminho)
+            try:
+                df = carregar_csv_upload(Path(caminho).read_bytes())
+            except ValueError:
+                continue
             if "ORDERDATE" in df.columns or "DATA" in df.columns:
                 return df, True, caminho
 

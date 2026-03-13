@@ -5,6 +5,7 @@ import pytest
 
 from app.presentation.data import (
     carregar_csv_upload,
+    carregar_dados,
     detect_date_columns,
     detect_value_columns,
     filter_value_columns,
@@ -60,6 +61,22 @@ def test_carregar_csv_upload_detects_separator_and_parses_rows():
 def test_carregar_csv_upload_rejects_invalid_payload():
     with pytest.raises(ValueError, match="Nao foi possivel ler o CSV enviado"):
         carregar_csv_upload(b"only-one-column-without-delimiter")
+
+
+def test_carregar_dados_reads_local_csv_with_fallback_encoding(tmp_path, monkeypatch):
+    raw_dir = tmp_path / "data" / "raw"
+    raw_dir.mkdir(parents=True)
+    csv_path = raw_dir / "sales_data_sample.csv"
+    csv_path.write_bytes("DATA;VENDAS;CIDADE\n2024-01-01;100;São Paulo\n".encode("cp1252"))
+    monkeypatch.chdir(tmp_path)
+    carregar_dados.clear()
+
+    df, dados_reais, origem = carregar_dados()
+
+    assert dados_reais is True
+    assert origem == "data/raw/sales_data_sample.csv"
+    assert list(df.columns) == ["DATA", "VENDAS", "CIDADE"]
+    assert df.iloc[0]["CIDADE"] == "São Paulo"
 
 
 def test_validate_upload_frame_enforces_operational_limits():
